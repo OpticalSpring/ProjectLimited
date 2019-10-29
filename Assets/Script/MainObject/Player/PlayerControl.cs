@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    public float moveSpeed;
-    public float rotateSpeed;
-    public float horizontalValue;
-    public float VerticalValue;
+    float horizontalValue;
+    float VerticalValue;
     GameObject rotatePos;
     GameObject playerModel;
     Vector3 targetPos;
+
+    PlayerState playerState;
     // Start is called before the first frame update
     void Start()
     {
         rotatePos = GameObject.Find("RotatePos");
         playerModel = gameObject.transform.GetChild(0).gameObject;
+        playerState = GetComponent<PlayerState>();
     }
 
     // Update is called once per frame
@@ -41,7 +42,19 @@ public class PlayerControl : MonoBehaviour
 
     void Move()
     {
-        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, moveSpeed * Time.deltaTime);
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.walkSpeed * Time.deltaTime);
+        }
+        else if (Input.GetKey(KeyCode.LeftShift))
+        {
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.fastRunSpeed * Time.deltaTime);
+        }
+        else
+        {
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.slowRunSpeed * Time.deltaTime);
+        }
+        
         RaycastHit rayHit;
         
         int mask = 1 << 9;
@@ -66,7 +79,7 @@ public class PlayerControl : MonoBehaviour
 
         float rotateDegree = Mathf.Atan2(dx, dz) * Mathf.Rad2Deg;
 
-        obj.transform.rotation = Quaternion.RotateTowards(obj.transform.rotation, Quaternion.Euler(0, rotateDegree, 0), rotateSpeed * Time.deltaTime);
+        obj.transform.rotation = Quaternion.RotateTowards(obj.transform.rotation, Quaternion.Euler(0, rotateDegree, 0), playerState.rotateSpeed * Time.deltaTime);
 
     }
 }
