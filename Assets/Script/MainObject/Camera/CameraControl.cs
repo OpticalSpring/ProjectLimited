@@ -54,7 +54,7 @@ public class CameraControl : MonoBehaviour
         {
             Vector3 hitPoint = rayHit.point;
             camDistance = Vector3.Distance(hitPoint, cam.transform.position) - 1f;
-            Debug.Log(rayHit.collider.name);
+            
         }
         else
         {

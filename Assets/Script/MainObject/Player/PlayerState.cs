@@ -8,4 +8,5 @@ public class PlayerState : MonoBehaviour
     public float slowRunSpeed;
     public float fastRunSpeed;
     public float rotateSpeed;
+    public float blinkDistance;
 }
