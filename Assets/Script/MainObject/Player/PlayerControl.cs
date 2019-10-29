@@ -42,6 +42,15 @@ public class PlayerControl : MonoBehaviour
     void Move()
     {
         gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, moveSpeed * Time.deltaTime);
+        RaycastHit rayHit;
+        
+        int mask = 1 << 9;
+        mask = ~mask;
+        if (Physics.Raycast(gameObject.transform.position + new Vector3(0,0.5f,0), Vector3.down, out rayHit, 1, mask))
+        {
+            Vector3 hitPoint = rayHit.point;
+            gameObject.transform.position = hitPoint;
+        }
     }
 
     void TurnPointCheck()
