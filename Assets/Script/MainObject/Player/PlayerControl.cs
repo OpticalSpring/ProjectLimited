@@ -5,17 +5,19 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
 
+    public Vector3[] oldPos;
 
     float horizontalValue;
     float VerticalValue;
     int blinkRotation;
     int blinkInputCount;
     float blinkInputDelay;
+    public int nowPosCount;
     GameObject rotatePos;
     GameObject playerModel;
     GameObject rayObj;
+    GameObject cam;
     Vector3 targetPos;
-
     PlayerState playerState;
     // Start is called before the first frame update
     void Start()
@@ -24,104 +26,183 @@ public class PlayerControl : MonoBehaviour
         playerModel = gameObject.transform.GetChild(0).gameObject;
         rayObj = gameObject.transform.GetChild(1).gameObject;
         playerState = GetComponent<PlayerState>();
+        cam = GameObject.Find("ThirdCamera");
+        StartCoroutine("PositionSave");
     }
 
     // Update is called once per frame
     void Update()
     {
+        DelayCheck();
         InputCheck();
+    }
+
+    void DelayCheck()
+    {
+
+        if (playerState.blinkStack < playerState.blinkStackMax)
+        {
+            playerState.blinkDelay -= Time.fixedDeltaTime;
+            if (playerState.blinkDelay < 0)
+            {
+                playerState.blinkStack++;
+                    playerState.blinkDelay =playerState.blinkDelayMax;
+                
+            }
+        }
+        else
+        {
+            
+        }
+
+        if(playerState.reveralDelay > 0)
+        {
+            playerState.reveralDelay -= Time.fixedDeltaTime;
+            if(playerState.reveralDelay < 0)
+            {
+                playerState.reveralDelay = 0;
+            }
+        }
+
+    }
+
+    IEnumerator PositionSave()
+    {
+        while (true) {
+            if (playerState.playerFSM != PlayerState.PlayerFSM.Reveral)
+            {
+                oldPos[nowPosCount] = gameObject.transform.position;
+                nowPosCount++;
+
+                if (nowPosCount >= 30)
+                {
+                    nowPosCount = 0;
+                }
+            }
+            yield return new WaitForSecondsRealtime(0.1f);
+        }
+    }
+
+    IEnumerator Reveral()
+    {
+        playerState.reveralDelay = playerState.reveralDelayMax;
+        playerState.playerFSM = PlayerState.PlayerFSM.Reveral;
+        cam.GetComponent<CameraControl>().followSpeed = 10;
+        int a = nowPosCount;
+        for (int i = 0; i < 29; i++)
+        {
+            a--;
+            //gameObject.transform.position = oldPos[a - i];
+            if(a== 0)
+            {
+                a = 29;
+            }
+            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, oldPos[a], 5*Time.deltaTime);
+            yield return new WaitForSecondsRealtime(0.01f);
+        }
+        playerState.playerFSM = PlayerState.PlayerFSM.Move;
+        cam.GetComponent<CameraControl>().followSpeed = 4;
     }
 
     void InputCheck()
     {
-        horizontalValue = Input.GetAxisRaw("Horizontal");
-        VerticalValue = Input.GetAxisRaw("Vertical");
+        if (playerState.playerFSM != PlayerState.PlayerFSM.Reveral){
+            horizontalValue = Input.GetAxisRaw("Horizontal");
+            VerticalValue = Input.GetAxisRaw("Vertical");
 
-        
-        BlinkCheck();
 
-        if (horizontalValue != 0 || VerticalValue != 0)
-        {
-            TurnPointCheck();
-            Turn(playerModel, targetPos);
-            Move();
+            BlinkCheck();
+
+            if (horizontalValue != 0 || VerticalValue != 0)
+            {
+                TurnPointCheck();
+                Turn(playerModel, targetPos);
+                Move();
+            }
+
+            if (playerState.reveralDelay <= 0 &&Input.GetKeyDown(KeyCode.Q))
+            {
+                StartCoroutine("Reveral");
+            }
+
         }
-
-
-
     }
 
     void BlinkCheck()
     {
-        if (Input.GetKeyDown(KeyCode.W) && !Input.GetKeyDown(KeyCode.A) && !Input.GetKeyDown(KeyCode.S) && !Input.GetKeyDown(KeyCode.D))
+        if (playerState.blinkStack > 0)
         {
-            if(blinkRotation == 0 && blinkInputCount == 1)
+            if (Input.GetKeyDown(KeyCode.W) && !Input.GetKeyDown(KeyCode.A) && !Input.GetKeyDown(KeyCode.S) && !Input.GetKeyDown(KeyCode.D))
             {
-                blinkInputCount = 0;
-                Blink();
+                if (blinkRotation == 0 && blinkInputCount == 1)
+                {
+                    blinkInputCount = 0;
+                    Blink();
+                }
+                else
+                {
+                    blinkInputCount = 1;
+                    blinkInputDelay = 0.3f;
+                }
+                blinkRotation = 0;
             }
-            else
+            if (Input.GetKeyDown(KeyCode.D) && !Input.GetKeyDown(KeyCode.A) && !Input.GetKeyDown(KeyCode.S) && !Input.GetKeyDown(KeyCode.W))
             {
-                blinkInputCount = 1;
-                blinkInputDelay = 0.3f;
+                if (blinkRotation == 1 && blinkInputCount == 1)
+                {
+                    blinkInputCount = 0;
+                    Blink();
+                }
+                else
+                {
+                    blinkInputCount = 1;
+                    blinkInputDelay = 0.3f;
+                }
+                blinkRotation = 1;
             }
-            blinkRotation = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.D) && !Input.GetKeyDown(KeyCode.A) && !Input.GetKeyDown(KeyCode.S) && !Input.GetKeyDown(KeyCode.W))
-        {
-            if (blinkRotation == 1 && blinkInputCount == 1)
+            if (Input.GetKeyDown(KeyCode.S) && !Input.GetKeyDown(KeyCode.A) && !Input.GetKeyDown(KeyCode.W) && !Input.GetKeyDown(KeyCode.D))
             {
-                blinkInputCount = 0;
-                Blink();
+                if (blinkRotation == 2 && blinkInputCount == 1)
+                {
+                    blinkInputCount = 0;
+                    Blink();
+                }
+                else
+                {
+                    blinkInputCount = 1;
+                    blinkInputDelay = 0.3f;
+                }
+                blinkRotation = 2;
             }
-            else
+            if (Input.GetKeyDown(KeyCode.A) && !Input.GetKeyDown(KeyCode.W) && !Input.GetKeyDown(KeyCode.S) && !Input.GetKeyDown(KeyCode.D))
             {
-                blinkInputCount = 1;
-                blinkInputDelay = 0.3f;
+                if (blinkRotation == 3 && blinkInputCount == 1)
+                {
+                    blinkInputCount = 0;
+                    Blink();
+                }
+                else
+                {
+                    blinkInputCount = 1;
+                    blinkInputDelay = 0.3f;
+                }
+                blinkRotation = 3;
             }
-            blinkRotation = 1;
-        }
-        if (Input.GetKeyDown(KeyCode.S) && !Input.GetKeyDown(KeyCode.A) && !Input.GetKeyDown(KeyCode.W) && !Input.GetKeyDown(KeyCode.D))
-        {
-            if (blinkRotation == 2 && blinkInputCount == 1)
-            {
-                blinkInputCount = 0;
-                Blink();
-            }
-            else
-            {
-                blinkInputCount = 1;
-                blinkInputDelay = 0.3f;
-            }
-            blinkRotation = 2;
-        }
-        if (Input.GetKeyDown(KeyCode.A) && !Input.GetKeyDown(KeyCode.W) && !Input.GetKeyDown(KeyCode.S) && !Input.GetKeyDown(KeyCode.D))
-        {
-            if (blinkRotation == 3 && blinkInputCount == 1)
-            {
-                blinkInputCount = 0;
-                Blink();
-            }
-            else
-            {
-                blinkInputCount = 1;
-                blinkInputDelay = 0.3f;
-            }
-            blinkRotation = 3;
-        }
 
-        if (blinkInputDelay > 0)
-        {
-            blinkInputDelay -= Time.fixedDeltaTime;
-        }
-        else
-        {
-            blinkInputCount = 0;
+            if (blinkInputDelay > 0)
+            {
+                blinkInputDelay -= Time.fixedDeltaTime;
+            }
+            else
+            {
+                blinkInputCount = 0;
+            }
         }
     }
 
     void Blink()
     {
+        playerState.blinkStack--;
         Debug.Log(blinkRotation);
         RaycastHit rayHit;
 
