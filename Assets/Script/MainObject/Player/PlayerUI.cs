@@ -9,6 +9,7 @@ public class PlayerUI : MonoBehaviour
     public Text blinkStack;
     public Text blinkDelay;
     public Text reveralDelay;
+    public Text lapseDelay;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,5 +27,6 @@ public class PlayerUI : MonoBehaviour
         blinkStack.text = ""+playerState.blinkStack;
         blinkDelay.text = "" + playerState.blinkDelay;
         reveralDelay.text = "" + playerState.reveralDelay;
+        lapseDelay.text = "" + playerState.lapseDelay;
     }
 }

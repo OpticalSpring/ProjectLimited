@@ -63,7 +63,14 @@ public class PlayerControl : MonoBehaviour
                 playerState.reveralDelay = 0;
             }
         }
-
+        if (playerState.lapseDelay > 0)
+        {
+            playerState.lapseDelay -= Time.fixedDeltaTime;
+            if (playerState.lapseDelay < 0)
+            {
+                playerState.lapseDelay = 0;
+            }
+        }
     }
 
     IEnumerator PositionSave()
@@ -92,7 +99,6 @@ public class PlayerControl : MonoBehaviour
         for (int i = 0; i < 29; i++)
         {
             a--;
-            //gameObject.transform.position = oldPos[a - i];
             if(a== 0)
             {
                 a = 29;
@@ -102,6 +108,16 @@ public class PlayerControl : MonoBehaviour
         }
         playerState.playerFSM = PlayerState.PlayerFSM.Move;
         cam.GetComponent<CameraControl>().followSpeed = 4;
+    }
+
+    IEnumerator Lapse()
+    {
+        playerState.lapseDelay = playerState.lapseDelayMax;
+        playerState.playerFSM = PlayerState.PlayerFSM.Lapse;
+        Time.timeScale = 0.2f;
+        yield return new WaitForSecondsRealtime(5f);
+        Time.timeScale = 1;
+        playerState.playerFSM = PlayerState.PlayerFSM.Move;
     }
 
     void InputCheck()
@@ -120,11 +136,14 @@ public class PlayerControl : MonoBehaviour
                 Move();
             }
 
-            if (playerState.reveralDelay <= 0 &&Input.GetKeyDown(KeyCode.Q))
+            if (playerState.reveralDelay <= 0 && Input.GetKeyDown(KeyCode.Q) && playerState.playerFSM == PlayerState.PlayerFSM.Move)
             {
                 StartCoroutine("Reveral");
             }
-
+            if (playerState.lapseDelay <= 0 && Input.GetKeyDown(KeyCode.E) && playerState.playerFSM == PlayerState.PlayerFSM.Move)
+            {
+                StartCoroutine("Lapse");
+            }
         }
     }
 
@@ -251,7 +270,7 @@ public class PlayerControl : MonoBehaviour
         mask = ~mask;
         if (Physics.Raycast(gameObject.transform.position + new Vector3(0,1,0), Vector3.down, out rayHit, 50, mask))
         {
-            Vector3 hitPoint = rayHit.point;
+            Vector3 hitPoint = rayHit.point + new Vector3(0,0.01f,0);
             gameObject.transform.position = hitPoint;
         }
     }
@@ -269,7 +288,7 @@ public class PlayerControl : MonoBehaviour
 
         float rotateDegree = Mathf.Atan2(dx, dz) * Mathf.Rad2Deg;
 
-        obj.transform.rotation = Quaternion.RotateTowards(obj.transform.rotation, Quaternion.Euler(0, rotateDegree, 0), playerState.rotateSpeed * Time.deltaTime);
+        obj.transform.rotation = Quaternion.RotateTowards(obj.transform.rotation, Quaternion.Euler(0, rotateDegree, 0), playerState.rotateSpeed * Time.fixedDeltaTime);
 
     }
 }

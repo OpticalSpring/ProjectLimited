@@ -19,20 +19,25 @@ public class PlayerState : MonoBehaviour
     [HideInInspector]
     public float reveralDelay;
     public float reveralDelayMax;
-
-    private void Start()
-    {
-        blinkStack = blinkStackMax;
-        blinkDelay = blinkDelayMax;
-        reveralDelay = reveralDelayMax;
-    }
+    [HideInInspector]
+    public float lapseDelay;
+    public float lapseDelayMax;
 
     public enum PlayerFSM
     {
         Move,
-        Blink,
         Reveral,
         Lapse
     }
     public PlayerFSM playerFSM;
+
+    public bool stiffness;
+    private void Start()
+    {
+        blinkStack = blinkStackMax;
+        blinkDelay = blinkDelayMax;
+        reveralDelay = 0;
+        lapseDelay = 0;
+    }
+
 }

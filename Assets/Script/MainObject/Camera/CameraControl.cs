@@ -40,7 +40,7 @@ public class CameraControl : MonoBehaviour
 
     void Follow()
     {
-        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, Player.transform.position, followSpeed * Time.deltaTime);
+        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, Player.transform.position, followSpeed * Time.fixedDeltaTime);
     }
 
     void DistanceCheck()
