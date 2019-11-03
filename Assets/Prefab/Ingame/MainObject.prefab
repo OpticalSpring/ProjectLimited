@@ -1106,8 +1106,11 @@ MonoBehaviour:
   reveralDelayMax: 10
   lapseDelay: 0
   lapseDelayMax: 10
+  attackDelay: 0
+  attackDelayMax: 3
   playerFSM: 0
   stiffness: 0
+  attackState: 0
 --- !u!114 &5244114266190599226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1152,6 +1155,7 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   nowPosCount: 0
+  mugi: {fileID: 5244114264469814858}
 --- !u!1 &5264205742063256966
 GameObject:
   m_ObjectHideFlags: 0

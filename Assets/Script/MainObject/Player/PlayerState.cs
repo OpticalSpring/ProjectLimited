@@ -22,7 +22,12 @@ public class PlayerState : MonoBehaviour
     [HideInInspector]
     public float lapseDelay;
     public float lapseDelayMax;
-
+    [HideInInspector]
+    public float attackDelay;
+    public float attackDelayMax;
+    public float attackNoInput;
+    [HideInInspector]
+    public float autoMoveing;
     public enum PlayerFSM
     {
         Move,
@@ -32,12 +37,14 @@ public class PlayerState : MonoBehaviour
     public PlayerFSM playerFSM;
 
     public bool stiffness;
+    public int attackState;
     private void Start()
     {
         blinkStack = blinkStackMax;
         blinkDelay = blinkDelayMax;
         reveralDelay = 0;
         lapseDelay = 0;
+        attackDelay = 0;
     }
 
 }

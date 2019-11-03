@@ -19,6 +19,7 @@ public class PlayerControl : MonoBehaviour
     GameObject cam;
     Vector3 targetPos;
     PlayerState playerState;
+    public GameObject mugi;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,19 +47,19 @@ public class PlayerControl : MonoBehaviour
             if (playerState.blinkDelay < 0)
             {
                 playerState.blinkStack++;
-                    playerState.blinkDelay =playerState.blinkDelayMax;
-                
+                playerState.blinkDelay = playerState.blinkDelayMax;
+
             }
         }
         else
         {
-            
+
         }
 
-        if(playerState.reveralDelay > 0)
+        if (playerState.reveralDelay > 0)
         {
             playerState.reveralDelay -= Time.fixedDeltaTime;
-            if(playerState.reveralDelay < 0)
+            if (playerState.reveralDelay < 0)
             {
                 playerState.reveralDelay = 0;
             }
@@ -71,11 +72,74 @@ public class PlayerControl : MonoBehaviour
                 playerState.lapseDelay = 0;
             }
         }
+        if (playerState.attackDelay > 0)
+        {
+            playerState.attackDelay -= Time.fixedDeltaTime;
+            if (playerState.attackDelay < 0)
+            {
+                playerState.attackDelay = 0;
+                AttackBack();
+            }
+        }
+        if (playerState.attackNoInput > 0)
+        {
+            playerState.attackNoInput -= Time.fixedDeltaTime;
+            if (playerState.attackNoInput < 0)
+            {
+                playerState.attackNoInput = 0;
+            }
+        }
+        if (playerState.autoMoveing > 0)
+        {
+            playerState.autoMoveing -= Time.fixedDeltaTime;
+            AutoMove();
+            if (playerState.autoMoveing < 0)
+            {
+                playerState.autoMoveing = 0;
+            }
+        }
+    }
+
+    void InputCheck()
+    {
+        horizontalValue = Input.GetAxisRaw("Horizontal");
+        VerticalValue = Input.GetAxisRaw("Vertical");
+
+        if (playerState.reveralDelay <= 0 && Input.GetKeyDown(KeyCode.Q) && playerState.playerFSM == PlayerState.PlayerFSM.Move)
+        {
+            StartCoroutine("Reveral");
+        }
+        if (playerState.lapseDelay <= 0 && Input.GetKeyDown(KeyCode.E) && playerState.playerFSM == PlayerState.PlayerFSM.Move)
+        {
+            StartCoroutine("Lapse");
+        }
+
+        AttackCheck();
+        BlinkCheck();
+
+        if (playerState.playerFSM != PlayerState.PlayerFSM.Reveral)
+        {
+            if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+            {
+                AttackBack();
+            }
+
+            if (horizontalValue != 0 || VerticalValue != 0)
+            {
+                if (playerState.attackState == 0)
+                {
+                    TurnPointCheck();
+                    Move();
+                }
+            }
+                    Turn(playerModel, targetPos);
+        }
     }
 
     IEnumerator PositionSave()
     {
-        while (true) {
+        while (true)
+        {
             if (playerState.playerFSM != PlayerState.PlayerFSM.Reveral)
             {
                 oldPos[nowPosCount] = gameObject.transform.position;
@@ -99,11 +163,11 @@ public class PlayerControl : MonoBehaviour
         for (int i = 0; i < 29; i++)
         {
             a--;
-            if(a== 0)
+            if (a == 0)
             {
                 a = 29;
             }
-            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, oldPos[a], 5*Time.deltaTime);
+            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, oldPos[a], 5 * Time.deltaTime);
             yield return new WaitForSecondsRealtime(0.01f);
         }
         playerState.playerFSM = PlayerState.PlayerFSM.Move;
@@ -120,36 +184,67 @@ public class PlayerControl : MonoBehaviour
         playerState.playerFSM = PlayerState.PlayerFSM.Move;
     }
 
-    void InputCheck()
+    void AttackCheck()
     {
-        if (playerState.playerFSM != PlayerState.PlayerFSM.Reveral){
-            horizontalValue = Input.GetAxisRaw("Horizontal");
-            VerticalValue = Input.GetAxisRaw("Vertical");
-
-
-            BlinkCheck();
-
-            if (horizontalValue != 0 || VerticalValue != 0)
+        if (playerState.playerFSM != PlayerState.PlayerFSM.Reveral && playerState.attackNoInput <= 0)
+        {
+            if (Input.GetMouseButtonDown(0))
             {
-                TurnPointCheck();
-                Turn(playerModel, targetPos);
-                Move();
+                if(playerState.attackState == 1)
+                {
+                    playerState.attackNoInput = 1;
+                }
+                else
+                {
+                    LeftAttack();
+                }
             }
 
-            if (playerState.reveralDelay <= 0 && Input.GetKeyDown(KeyCode.Q) && playerState.playerFSM == PlayerState.PlayerFSM.Move)
+            if (Input.GetMouseButtonDown(1))
             {
-                StartCoroutine("Reveral");
-            }
-            if (playerState.lapseDelay <= 0 && Input.GetKeyDown(KeyCode.E) && playerState.playerFSM == PlayerState.PlayerFSM.Move)
-            {
-                StartCoroutine("Lapse");
+                if (playerState.attackState == 2)
+                {
+                    playerState.attackNoInput = 1;
+                }
+                else
+                {
+                    RightAttack();
+                }
             }
         }
+    }
+    void LeftAttack()
+    {
+        mugi.GetComponent<MeshRenderer>().material.color = new Vector4(1, 0, 0, 1);
+        playerState.attackDelay = playerState.attackDelayMax;
+        playerState.attackState = 1;
+        playerState.autoMoveing = 0.3f;
+    }
+
+    void RightAttack()
+    {
+        mugi.GetComponent<MeshRenderer>().material.color = new Vector4(0, 0, 1, 1);
+        playerState.attackDelay = playerState.attackDelayMax;
+        playerState.attackState = 2;
+        playerState.autoMoveing = 0.3f;
+    }
+
+    void AutoMove()
+    {
+        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.walkSpeed * Time.fixedDeltaTime);
+    }
+
+    void AttackBack()
+    {
+        mugi.GetComponent<MeshRenderer>().material.color = new Vector4(1, 1, 1, 1);
+        playerState.attackDelay = 0;
+        playerState.attackState = 0;
+        playerState.autoMoveing = 0;
     }
 
     void BlinkCheck()
     {
-        if (playerState.blinkStack > 0)
+        if (playerState.playerFSM != PlayerState.PlayerFSM.Reveral && playerState.blinkStack > 0)
         {
             if (Input.GetKeyDown(KeyCode.W) && !Input.GetKeyDown(KeyCode.A) && !Input.GetKeyDown(KeyCode.S) && !Input.GetKeyDown(KeyCode.D))
             {
@@ -232,20 +327,20 @@ public class PlayerControl : MonoBehaviour
         rayObjRot.x = 0;
         rayObjRot.z = 0;
         rayObj.transform.eulerAngles = rayObjRot;
-        if (Physics.Raycast(gameObject.transform.position + new Vector3(0, 1f, 0), rayObj.transform.forward , out rayHit, playerState.blinkDistance, mask))
+        if (Physics.Raycast(gameObject.transform.position + new Vector3(0, 1f, 0), rayObj.transform.forward, out rayHit, playerState.blinkDistance, mask))
         {
 
 
             gameObject.transform.position = rayHit.point;
-            gameObject.transform.position += new Vector3(0,1f, 0);
+            gameObject.transform.position += new Vector3(0, 1f, 0);
         }
         else
         {
             rotatePos.transform.localPosition = new Vector3(horizontalValue * playerState.blinkDistance, 0, VerticalValue * playerState.blinkDistance);
-            
+
 
             gameObject.transform.position = rotatePos.transform.position;
-            gameObject.transform.position += new Vector3(0,1f, 0);
+            gameObject.transform.position += new Vector3(0, 1f, 0);
         }
     }
 
@@ -263,14 +358,14 @@ public class PlayerControl : MonoBehaviour
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.slowRunSpeed * Time.fixedDeltaTime);
         }
-        
+
         RaycastHit rayHit;
-        
+
         int mask = 1 << 9;
         mask = ~mask;
-        if (Physics.Raycast(gameObject.transform.position + new Vector3(0,1,0), Vector3.down, out rayHit, 50, mask))
+        if (Physics.Raycast(gameObject.transform.position + new Vector3(0, 1, 0), Vector3.down, out rayHit, 50, mask))
         {
-            Vector3 hitPoint = rayHit.point + new Vector3(0,0.01f,0);
+            Vector3 hitPoint = rayHit.point + new Vector3(0, 0.01f, 0);
             gameObject.transform.position = hitPoint;
         }
     }
