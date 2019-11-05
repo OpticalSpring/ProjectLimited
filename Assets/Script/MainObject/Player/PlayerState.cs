@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerState : MonoBehaviour
 {
+    public Vector2 HP;
+
     public float walkSpeed;
     public float slowRunSpeed;
     public float fastRunSpeed;
@@ -28,6 +30,14 @@ public class PlayerState : MonoBehaviour
     public float attackNoInput;
     [HideInInspector]
     public float autoMoveing;
+
+    public bool stiffness;
+    [HideInInspector]
+    public float stiffnessDelay;
+    [HideInInspector]
+    public int attackState;
+
+
     public enum PlayerFSM
     {
         Move,
@@ -36,8 +46,7 @@ public class PlayerState : MonoBehaviour
     }
     public PlayerFSM playerFSM;
 
-    public bool stiffness;
-    public int attackState;
+
     private void Start()
     {
         blinkStack = blinkStackMax;

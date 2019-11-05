@@ -328,7 +328,6 @@ public class PlayerControl : MonoBehaviour
     void Blink()
     {
         playerState.blinkStack--;
-        Debug.Log(blinkRotation);
         RaycastHit rayHit;
 
         int mask = 1 << 9;
