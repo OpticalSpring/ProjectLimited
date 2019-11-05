@@ -246,6 +246,15 @@ public class PlayerControl : MonoBehaviour
     {
         if (playerState.playerFSM != PlayerState.PlayerFSM.Reveral && playerState.blinkStack > 0)
         {
+            if (horizontalValue != 0 || VerticalValue != 0)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    Blink();
+                }
+            }
+
+
             if (Input.GetKeyDown(KeyCode.W) && !Input.GetKeyDown(KeyCode.A) && !Input.GetKeyDown(KeyCode.S) && !Input.GetKeyDown(KeyCode.D))
             {
                 if (blinkRotation == 0 && blinkInputCount == 1)
@@ -313,6 +322,8 @@ public class PlayerControl : MonoBehaviour
             }
         }
     }
+
+    
 
     void Blink()
     {
