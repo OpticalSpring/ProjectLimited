@@ -478,6 +478,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lighting
       objectReference: {fileID: 0}
+    - target: {fileID: 2727983918523728001, guid: de2f60ab23c1b4d42b37b9eb26320587,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2727983918523728000, guid: de2f60ab23c1b4d42b37b9eb26320587,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -601,6 +606,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5505062801247982816, guid: d0056b58c0aec8f4f8413d1eec45da8f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -49.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0056b58c0aec8f4f8413d1eec45da8f, type: 3}
