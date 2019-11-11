@@ -28,8 +28,8 @@ public class PlayerUI : MonoBehaviour
     {
         blinkStack.text = ""+playerState.blinkStack;
         blinkDelay.text = "" + playerState.blinkDelay;
-        reveralDelay.text = "" + playerState.reveralDelay;
-        lapseDelay.text = "" + playerState.lapseDelay;
+        reveralDelay.text = "" + (int)playerState.reveralDelay;
+        lapseDelay.text = "" + (int)playerState.lapseDelay;
     }
 
     void SetBlink()
