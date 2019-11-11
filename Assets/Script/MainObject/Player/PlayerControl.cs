@@ -20,6 +20,7 @@ public class PlayerControl : MonoBehaviour
     Vector3 targetPos;
     PlayerState playerState;
     public GameObject mugi;
+    PlayerAni ani;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +28,7 @@ public class PlayerControl : MonoBehaviour
         playerModel = gameObject.transform.GetChild(0).gameObject;
         rayObj = gameObject.transform.GetChild(1).gameObject;
         playerState = GetComponent<PlayerState>();
+        ani = GetComponent<PlayerAni>();
         cam = GameObject.Find("ThirdCamera");
         StartCoroutine("PositionSave");
     }
@@ -102,6 +104,7 @@ public class PlayerControl : MonoBehaviour
 
     void InputCheck()
     {
+        ani.movement = 0;
         horizontalValue = Input.GetAxisRaw("Horizontal");
         VerticalValue = Input.GetAxisRaw("Vertical");
 
@@ -156,6 +159,7 @@ public class PlayerControl : MonoBehaviour
 
     IEnumerator Reveral()
     {
+        ani.aniState = 3;
         playerState.reveralDelay = playerState.reveralDelayMax;
         playerState.playerFSM = PlayerState.PlayerFSM.Reveral;
         cam.GetComponent<CameraControl>().followSpeed = 10;
@@ -172,6 +176,7 @@ public class PlayerControl : MonoBehaviour
         }
         playerState.playerFSM = PlayerState.PlayerFSM.Move;
         cam.GetComponent<CameraControl>().followSpeed = 4;
+        ani.aniState = 0;
     }
 
     IEnumerator Lapse()
@@ -215,6 +220,8 @@ public class PlayerControl : MonoBehaviour
     }
     void LeftAttack()
     {
+        ani.aniState = 1;
+        ani.attackState = 1;
         mugi.GetComponent<MeshRenderer>().material.color = new Vector4(1, 0, 0, 1);
         playerState.attackDelay = playerState.attackDelayMax;
         playerState.attackState = 1;
@@ -223,6 +230,8 @@ public class PlayerControl : MonoBehaviour
 
     void RightAttack()
     {
+        ani.aniState = 1;
+        ani.attackState = 2;
         mugi.GetComponent<MeshRenderer>().material.color = new Vector4(0, 0, 1, 1);
         playerState.attackDelay = playerState.attackDelayMax;
         playerState.attackState = 2;
@@ -240,6 +249,8 @@ public class PlayerControl : MonoBehaviour
         playerState.attackDelay = 0;
         playerState.attackState = 0;
         playerState.autoMoveing = 0;
+        ani.aniState = 0;
+        ani.attackState = 0;
     }
 
     void BlinkCheck()
@@ -327,6 +338,7 @@ public class PlayerControl : MonoBehaviour
 
     void Blink()
     {
+        ani.aniState = 2;
         playerState.blinkStack--;
         RaycastHit rayHit;
 
@@ -350,21 +362,53 @@ public class PlayerControl : MonoBehaviour
             gameObject.transform.position = rotatePos.transform.position;
             gameObject.transform.position += new Vector3(0, 1f, 0);
         }
+        StartCoroutine("BlinkRollBackDelay");
     }
+
+    IEnumerator BlinkRollBackDelay()
+    {
+        bool rollBackCheck = false;
+        Vector3 bPos = gameObject.transform.position;
+        for (int i = 0; i < 100; i++)
+        {
+            if(Vector3.Distance(gameObject.transform.position,bPos) > 1f)
+            {
+                if(rollBackCheck == false)
+                {
+                    rollBackCheck = true;
+                ani.aniState = 0;
+                }
+            }
+            yield return new WaitForSeconds(0.01f);
+        }
+        if (ani.aniState == 1 && rollBackCheck == false)
+        {
+        ani.aniState = 0;
+            rollBackCheck = true;
+        }
+    }
+    
 
     void Move()
     {
+        
         if (Input.GetKey(KeyCode.LeftShift))
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.fastRunSpeed * Time.fixedDeltaTime);
+            ani.movement = 1;
+
         }
         else if (Input.GetKey(KeyCode.LeftControl))
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.walkSpeed * Time.fixedDeltaTime);
+            ani.movement = 1;
+            
         }
         else
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.slowRunSpeed * Time.fixedDeltaTime);
+            ani.movement = 1;
+           
         }
 
         RaycastHit rayHit;

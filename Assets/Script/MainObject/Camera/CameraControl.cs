@@ -73,7 +73,7 @@ public class CameraControl : MonoBehaviour
 
         rotateValue.y += Input.GetAxis("Mouse X") * rotationSpeed * Time.fixedDeltaTime;
         rotateValue.x -= Input.GetAxis("Mouse Y") * rotationSpeed * Time.fixedDeltaTime;
-        rotateValue.x = Mathf.Clamp(rotateValue.x, -30f, 70f);
+        rotateValue.x = Mathf.Clamp(rotateValue.x, -70f, 70f);
         targetRotation = Quaternion.Euler(rotateValue);
 
         Quaternion q = targetRotation;
