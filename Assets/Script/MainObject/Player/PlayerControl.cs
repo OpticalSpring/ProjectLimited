@@ -339,8 +339,6 @@ public class PlayerControl : MonoBehaviour
         rayObj.transform.eulerAngles = rayObjRot;
         if (Physics.Raycast(gameObject.transform.position + new Vector3(0, 1f, 0), rayObj.transform.forward, out rayHit, playerState.blinkDistance, mask))
         {
-
-
             gameObject.transform.position = rayHit.point;
             gameObject.transform.position += new Vector3(0, 1f, 0);
         }
@@ -356,13 +354,13 @@ public class PlayerControl : MonoBehaviour
 
     void Move()
     {
-        if (Input.GetKey(KeyCode.LeftControl))
-        {
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.walkSpeed * Time.fixedDeltaTime);
-        }
-        else if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift))
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.fastRunSpeed * Time.fixedDeltaTime);
+        }
+        else if (Input.GetKey(KeyCode.LeftControl))
+        {
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.walkSpeed * Time.fixedDeltaTime);
         }
         else
         {
