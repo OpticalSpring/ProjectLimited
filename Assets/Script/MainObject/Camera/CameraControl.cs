@@ -8,7 +8,7 @@ public class CameraControl : MonoBehaviour
     public float rotationSpeed;
     public float maxDistance;
     float camDistance;
-    GameObject Player;
+    public GameObject Player;
     GameObject cam;
     GameObject realCamera;
     GameObject rotatePivot;
@@ -17,7 +17,7 @@ public class CameraControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Player = GameObject.Find("Player");
+        //Player = GameObject.Find("Player");
         cam = gameObject.transform.GetChild(0).gameObject;
         realCamera = gameObject.transform.GetChild(0).GetChild(0).gameObject;
         rotatePivot = gameObject.transform.GetChild(1).gameObject;

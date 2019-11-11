@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
+    public GameObject player;
     PlayerState playerState;
     public Text blinkStack;
     public Image[] blinkStackImage;
@@ -14,7 +15,7 @@ public class PlayerUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerState = GameObject.Find("Player").GetComponent<PlayerState>();
+        playerState = player.GetComponent<PlayerState>();
     }
 
     // Update is called once per frame
