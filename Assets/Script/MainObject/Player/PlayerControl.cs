@@ -153,7 +153,7 @@ public class PlayerControl : MonoBehaviour
                     nowPosCount = 0;
                 }
             }
-            yield return new WaitForSecondsRealtime(0.1f);
+            yield return new WaitForSecondsRealtime(0.2f);
         }
     }
 
@@ -166,13 +166,18 @@ public class PlayerControl : MonoBehaviour
         int a = nowPosCount;
         for (int i = 0; i < 29; i++)
         {
+            
             a--;
-            if (a == 0)
+            if (a == -1)
             {
-                a = 29;
+                a = 28;
             }
-            gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, oldPos[a], 5 * Time.deltaTime);
-            yield return new WaitForSecondsRealtime(0.01f);
+            for (int j = 0; j < 2; j++)
+            {
+                gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, oldPos[a], 5 * Time.deltaTime);
+                yield return new WaitForSecondsRealtime(0.01f);
+            }
+            //yield return new WaitForSecondsRealtime(0.01f);
         }
         playerState.playerFSM = PlayerState.PlayerFSM.Move;
         cam.GetComponent<CameraControl>().followSpeed = 4;
