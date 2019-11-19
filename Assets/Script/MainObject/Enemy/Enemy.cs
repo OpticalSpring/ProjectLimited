@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void Hit()
     {
-
+        HP.x--;
     }
 
     public virtual void DistanceCheck()
@@ -27,6 +27,17 @@ public class Enemy : MonoBehaviour
 
     public virtual void Chase()
     {
-        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, player.transform.position, movementSpeed * Time.deltaTime);
+        Turn(gameObject, player.transform.position);
+        gameObject.transform.Translate(Vector3.forward * movementSpeed * Time.deltaTime);
+    }
+
+    public virtual void Turn(GameObject obj, Vector3 target)
+    {
+        float dz = target.z - obj.transform.position.z;
+        float dx = target.x - obj.transform.position.x;
+
+        float rotateDegree = Mathf.Atan2(dx, dz) * Mathf.Rad2Deg;
+
+        obj.transform.rotation = Quaternion.RotateTowards(obj.transform.rotation, Quaternion.Euler(0, rotateDegree, 0), 300 * Time.deltaTime);
     }
 }

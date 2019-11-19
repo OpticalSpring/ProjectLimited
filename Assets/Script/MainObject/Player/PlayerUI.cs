@@ -8,9 +8,7 @@ public class PlayerUI : MonoBehaviour
 {
     public GameObject player;
     PlayerState playerState;
-    public Text blinkStack;
     public Image[] blinkStackImage;
-    public Text blinkDelay;
     public Text reveralDelay;
     public Text lapseDelay;
     public Text smartWatchTimeText;
@@ -74,8 +72,6 @@ public class PlayerUI : MonoBehaviour
 
     void SetText()
     {
-        blinkStack.text = ""+playerState.blinkStack;
-        blinkDelay.text = "" + playerState.blinkDelay;
         reveralDelay.text = "" + (int)playerState.reveralDelay;
         lapseDelay.text = "" + (int)playerState.lapseDelay;
 

@@ -37,6 +37,7 @@ public class PlayerState : MonoBehaviour
     [HideInInspector]
     public int attackState;
 
+    public GameObject attackPoint;
 
     public enum PlayerFSM
     {
