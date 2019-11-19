@@ -64,7 +64,7 @@ public class CameraControl : MonoBehaviour
     
     void DistanceSet()
     {
-        realCamera.transform.localPosition = new Vector3(1, 0, -camDistance);
+        realCamera.transform.localPosition = new Vector3(0.5f, 0.5f, -camDistance);
     }
 
     void RotateCam()
