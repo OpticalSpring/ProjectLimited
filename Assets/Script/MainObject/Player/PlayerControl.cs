@@ -31,6 +31,7 @@ public class PlayerControl : MonoBehaviour
         ani = GetComponent<PlayerAni>();
         cam = GameObject.Find("ThirdCamera");
         StartCoroutine("PositionSave");
+
     }
 
     // Update is called once per frame
@@ -141,6 +142,10 @@ public class PlayerControl : MonoBehaviour
 
     IEnumerator PositionSave()
     {
+        for (int i = 0; i < 30; i++)
+        {
+            oldPos[i] = gameObject.transform.position;
+        }
         while (true)
         {
             if (playerState.playerFSM != PlayerState.PlayerFSM.Reveral)
@@ -153,7 +158,7 @@ public class PlayerControl : MonoBehaviour
                     nowPosCount = 0;
                 }
             }
-            yield return new WaitForSecondsRealtime(0.2f);
+            yield return new WaitForSecondsRealtime(0.15f);
         }
     }
 
@@ -166,11 +171,10 @@ public class PlayerControl : MonoBehaviour
         int a = nowPosCount;
         for (int i = 0; i < 29; i++)
         {
-            
             a--;
             if (a == -1)
             {
-                a = 28;
+                a = 29;
             }
             for (int j = 0; j < 2; j++)
             {
@@ -372,6 +376,7 @@ public class PlayerControl : MonoBehaviour
 
     IEnumerator BlinkRollBackDelay()
     {
+        
         bool rollBackCheck = false;
         Vector3 bPos = gameObject.transform.position;
         for (int i = 0; i < 100; i++)
@@ -381,14 +386,14 @@ public class PlayerControl : MonoBehaviour
                 if(rollBackCheck == false)
                 {
                     rollBackCheck = true;
-                ani.aniState = 0;
+                    ani.aniState = 0;
                 }
             }
             yield return new WaitForSeconds(0.01f);
         }
-        if (ani.aniState == 1 && rollBackCheck == false)
+        if (ani.aniState == 2 && rollBackCheck == false)
         {
-        ani.aniState = 0;
+            ani.aniState = 0;
             rollBackCheck = true;
         }
     }

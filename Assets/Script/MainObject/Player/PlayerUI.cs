@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -12,10 +13,16 @@ public class PlayerUI : MonoBehaviour
     public Text blinkDelay;
     public Text reveralDelay;
     public Text lapseDelay;
+    public Text smartWatchTimeText;
+    public Text smartWatchSpeedText;
+    public Image HP;
     public GameObject[] reveralOutline;
     public GameObject[] lapseOutline;
     public GameObject smartWatchMask;
+    public GameObject smartWatchObject;
     public Vector3 maskTargetPos;
+    public Vector3 smartWatchScale;
+    public float HPValue;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,25 +34,41 @@ public class PlayerUI : MonoBehaviour
     {
         SetText();
         SetBlink();
-        SmartWatchMaskSet();
+        SetSmartWatch();
     }
 
-    void SmartWatchMaskSet()
+    void SetHP()
+    {
+        HPValue = Mathf.Lerp(HPValue, playerState.HP.x, Time.deltaTime);
+        HP.fillAmount = HPValue/ playerState.HP.y;
+    }
+
+    void SetSmartWatch()
     {
         switch (playerState.playerFSM)
         {
             case PlayerState.PlayerFSM.Move:
                 maskTargetPos.x = -150;
+                smartWatchScale = new Vector3(1, 1, 1);
+                smartWatchSpeedText.text = "<size=30>X</size><size=15> </size><color=#ff006a>1</color>";
                 break;
             case PlayerState.PlayerFSM.Reveral:
                 maskTargetPos.x = 0;
+                smartWatchScale = new Vector3(1.3f, 1.3f, 1.3f);
+                smartWatchSpeedText.text = "<size=30>X</size><size=15> </size><color=#ff006a>-5</color>";
                 break;
             case PlayerState.PlayerFSM.Lapse:
                 maskTargetPos.x = 150;
+                smartWatchScale = new Vector3(1.3f, 1.3f, 1.3f);
+                smartWatchSpeedText.text = "<size=30>X</size><size=15> </size><color=#ff006a>0.2</color>";
                 break;
 
         }
         smartWatchMask.transform.localPosition = Vector3.Lerp(smartWatchMask.transform.localPosition, maskTargetPos, 10 * Time.fixedDeltaTime);
+        smartWatchObject.transform.localScale = Vector3.Lerp(smartWatchObject.transform.localScale, smartWatchScale, 10 * Time.fixedDeltaTime);
+        string str = String.Format("{0:d2}:{1:d2}:{2:d2}", DateTime.Now.Hour, DateTime.Now.Minute, DateTime.Now.Second);
+        smartWatchTimeText.text = str;
+
     }
 
     void SetText()

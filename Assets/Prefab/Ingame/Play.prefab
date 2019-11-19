@@ -2261,10 +2261,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: e0b4b8aa280674c40a5abcdfef79da29, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
@@ -2353,6 +2353,7 @@ GameObject:
   - component: {fileID: 1835389475449971390}
   - component: {fileID: 1835389475449971389}
   - component: {fileID: 1835389475449971388}
+  - component: {fileID: 4254961761240664882}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -2443,6 +2444,42 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4254961761240664882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1835389475449971363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4a440704e6f2a44682df11d95e51f12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  blinkStack: {fileID: 0}
+  blinkStackImage:
+  - {fileID: 1835389473924084097}
+  - {fileID: 1835389474057866474}
+  - {fileID: 1835389474963802091}
+  blinkDelay: {fileID: 0}
+  reveralDelay: {fileID: 3646284478615132497}
+  lapseDelay: {fileID: 4105718487574492211}
+  smartWatchTimeText: {fileID: 3620650224622750213}
+  smartWatchSpeedText: {fileID: 8555456744755172444}
+  HP: {fileID: 1835389475379969995}
+  reveralOutline:
+  - {fileID: 1835389474373897931}
+  - {fileID: 1835389475518135775}
+  - {fileID: 8035081936540227282}
+  lapseOutline:
+  - {fileID: 1835389474486158721}
+  - {fileID: 1835389474029135487}
+  - {fileID: 4193737979099314254}
+  smartWatchMask: {fileID: 4926005861115990282}
+  smartWatchObject: {fileID: 1835389474628618714}
+  maskTargetPos: {x: 0, y: 0, z: 0}
+  smartWatchScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1835389475518135775
 GameObject:
   m_ObjectHideFlags: 0
@@ -2773,7 +2810,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -152.5, y: -0.6}
+  m_AnchoredPosition: {x: -150, y: -0.6}
   m_SizeDelta: {x: 451, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4709031651717142966
