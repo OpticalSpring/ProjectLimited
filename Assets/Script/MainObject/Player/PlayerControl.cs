@@ -229,22 +229,31 @@ public class PlayerControl : MonoBehaviour
     }
     void LeftAttack()
     {
-        ani.aniState = 1;
+        Attack();
         ani.attackState = 1;
         mugi.GetComponent<MeshRenderer>().material.color = new Vector4(1, 0, 0, 1);
-        playerState.attackDelay = playerState.attackDelayMax;
-        playerState.attackState = 1;
-        playerState.autoMoveing = 0.3f;
     }
 
     void RightAttack()
     {
-        ani.aniState = 1;
+        Attack();
         ani.attackState = 2;
         mugi.GetComponent<MeshRenderer>().material.color = new Vector4(0, 0, 1, 1);
+    }
+
+    void Attack()
+    {
+        ani.aniState = 1;
         playerState.attackDelay = playerState.attackDelayMax;
-        playerState.attackState = 2;
         playerState.autoMoveing = 0.3f;
+        Collider[] colliderArray = Physics.OverlapBox(playerState.attackPoint.transform.position, new Vector3(1.5f, 1.5f, 1.5f), playerState.attackPoint.transform.rotation);
+        for (int i = 0; i < colliderArray.Length; i++)
+        {
+            if (colliderArray[i].tag == "Enemy")
+            {
+                colliderArray[i].gameObject.GetComponent<Enemy>().Hit();
+            }
+        }
     }
 
     void AutoMove()
