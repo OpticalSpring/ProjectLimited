@@ -85,7 +85,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 5903ea7030e65104d901d144e4e9393c, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
@@ -2573,6 +2573,9 @@ MonoBehaviour:
   enemyUI: {fileID: 1835389474342729815}
   enemyHP: {fileID: 1835389474497985009}
   enemyNameText: {fileID: 1276581640900806665}
+  bossUI: {fileID: 0}
+  bossHP: {fileID: 0}
+  bossNameText: {fileID: 0}
   maskTargetPos: {x: 0, y: 0, z: 0}
   smartWatchScale: {x: 0, y: 0, z: 0}
   HPValue: 0
