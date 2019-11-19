@@ -34,12 +34,13 @@ public class PlayerUI : MonoBehaviour
     {
         SetText();
         SetBlink();
+        SetHP();
         SetSmartWatch();
     }
 
     void SetHP()
     {
-        HPValue = Mathf.Lerp(HPValue, playerState.HP.x, Time.deltaTime);
+        HPValue = Mathf.Lerp(HPValue, playerState.HP.x, Time.fixedDeltaTime * 2);
         HP.fillAmount = HPValue/ playerState.HP.y;
     }
 
