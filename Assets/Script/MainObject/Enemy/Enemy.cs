@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void Start()
     {
-        player = GameObject.Find("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public virtual void Hit()
