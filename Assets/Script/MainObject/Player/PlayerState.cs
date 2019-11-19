@@ -38,7 +38,7 @@ public class PlayerState : MonoBehaviour
     public int attackState;
 
     public GameObject attackPoint;
-
+    public GameObject attackTarget;
     public enum PlayerFSM
     {
         Move,

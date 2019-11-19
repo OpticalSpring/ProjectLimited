@@ -251,6 +251,7 @@ public class PlayerControl : MonoBehaviour
         {
             if (colliderArray[i].tag == "Enemy")
             {
+                playerState.attackTarget = colliderArray[i].gameObject;
                 colliderArray[i].gameObject.GetComponent<Enemy>().Hit();
             }
         }

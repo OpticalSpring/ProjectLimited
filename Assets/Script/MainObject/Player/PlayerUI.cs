@@ -18,9 +18,16 @@ public class PlayerUI : MonoBehaviour
     public GameObject[] lapseOutline;
     public GameObject smartWatchMask;
     public GameObject smartWatchObject;
+    public GameObject enemyUI;
+    public Image enemyHP;
+    public Text enemyNameText;
+    public GameObject bossUI;
+    public Image bossHP;
+    public Text bossNameText;
     public Vector3 maskTargetPos;
     public Vector3 smartWatchScale;
     public float HPValue;
+    public float enemyHPValue;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +41,22 @@ public class PlayerUI : MonoBehaviour
         SetBlink();
         SetHP();
         SetSmartWatch();
+        SetEnemyHP();
+    }
+
+    void SetEnemyHP()
+    {
+        if (playerState.attackTarget != null)
+        {
+            enemyUI.SetActive(true);
+            enemyNameText.text = playerState.attackTarget.name;
+            enemyHPValue = Mathf.Lerp(enemyHPValue, playerState.attackTarget.GetComponent<Enemy>().HP.x, Time.fixedDeltaTime * 2);
+            enemyHP.fillAmount = enemyHPValue / playerState.attackTarget.GetComponent<Enemy>().HP.y;
+        }
+        else
+        {
+            enemyUI.SetActive(false);
+        }
     }
 
     void SetHP()
