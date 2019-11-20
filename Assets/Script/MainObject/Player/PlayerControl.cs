@@ -100,10 +100,19 @@ public class PlayerControl : MonoBehaviour
                 playerState.autoMoveing = 0;
             }
         }
+
+        if(playerState.hitTime > 0)
+        {
+            playerState.hitTime -= Time.fixedDeltaTime;
+        }
     }
 
     void InputCheck()
     {
+        if(playerState.hitTime > 0.5f)
+        {
+            return;
+        }
         ani.movement = 0;
         horizontalValue = Input.GetAxisRaw("Horizontal");
         VerticalValue = Input.GetAxisRaw("Vertical");
@@ -164,6 +173,10 @@ public class PlayerControl : MonoBehaviour
     IEnumerator Reveral()
     {
         ani.aniState = 3;
+        if(playerState.HP.x < playerState.HP.y)
+        {
+            playerState.HP.x++;
+        }
         playerState.reveralDelay = playerState.reveralDelayMax;
         playerState.playerFSM = PlayerState.PlayerFSM.Reveral;
         cam.GetComponent<CameraControl>().followSpeed = 10;
@@ -453,5 +466,21 @@ public class PlayerControl : MonoBehaviour
 
         obj.transform.rotation = Quaternion.RotateTowards(obj.transform.rotation, Quaternion.Euler(0, rotateDegree, 0), playerState.rotateSpeed * Time.fixedDeltaTime);
 
+    }
+
+    public void Hit()
+    {
+        if(playerState.playerFSM == PlayerState.PlayerFSM.Reveral)
+        {
+            return;
+        }
+
+        if(playerState.hitTime > 0)
+        {
+            return;
+        }
+
+        playerState.hitTime = 1.0f;
+        playerState.HP.x--;
     }
 }

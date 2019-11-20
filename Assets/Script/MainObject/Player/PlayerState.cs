@@ -11,6 +11,7 @@ public class PlayerState : MonoBehaviour
     public float fastRunSpeed;
     public float rotateSpeed;
     public float blinkDistance;
+    public float hitTime;
 
     [HideInInspector]
     public int blinkStack;

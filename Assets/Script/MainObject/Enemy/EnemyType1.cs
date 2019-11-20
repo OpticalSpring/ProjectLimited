@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class EnemyType1 : Enemy
 {
-    
+    public float attackTime;
+    float realAttackTime;
+    Vector3 nPos;
+    float attackTimer;
 
     // Update is called once per frame
     void Update()
@@ -17,9 +20,51 @@ public class EnemyType1 : Enemy
             return;
         }
         DistanceCheck();
-        if(playerDistance > attackDistance)
+        if (realAttackTime > attackTime-2)
         {
+            
+            Turn(gameObject, nPos);
+            realAttackTime -= Time.deltaTime;
+
+        }
+        else if(realAttackTime > 0)
+        {
+            Attack();
+            realAttackTime -= Time.deltaTime;
+        }
+        else if (playerDistance > attackDistance)
+        {
+            Turn(gameObject, player.transform.position);
             Chase();
+        }
+        else if (realAttackTime <= 0)
+        {
+            realAttackTime = attackTime;
+            nPos = player.transform.position;
+            nPos.x = nPos.x + Random.Range(-1f, 1f);
+            nPos.z = nPos.z + Random.Range(-1f, 1f);
+        }
+    }
+
+    protected override void Attack()
+    {
+        gameObject.transform.Translate(Vector3.forward * movementSpeed*3 * Time.deltaTime);
+
+        if (attackTimer < 0)
+        {
+            attackTimer = 0.3f;
+            Collider[] colliderArray = Physics.OverlapBox(gameObject.transform.position, new Vector3(1.0f, 1.0f, 1.0f), gameObject.transform.rotation);
+            for (int i = 0; i < colliderArray.Length; i++)
+            {
+                if (colliderArray[i].tag == "Player")
+                {
+                    colliderArray[i].gameObject.GetComponent<PlayerControl>().Hit();
+                }
+            }
+        }
+        else
+        {
+            attackTimer -= Time.fixedDeltaTime;
         }
     }
 

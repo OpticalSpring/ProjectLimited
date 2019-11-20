@@ -13,6 +13,7 @@ public class CameraControl : MonoBehaviour
     GameObject realCamera;
     GameObject rotatePivot;
     Vector3 rotateValue;
+    float fovValue;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,7 @@ public class CameraControl : MonoBehaviour
         DistanceSet();
         RotatePosSet();
         RotateCam();
+        SetFOV();
     }
     
     void RotatePosSet()
@@ -78,5 +80,18 @@ public class CameraControl : MonoBehaviour
 
         Quaternion q = targetRotation;
         cam.transform.rotation = targetRotation;
+    }
+
+    void SetFOV()
+    {
+        if(player.GetComponent<PlayerState>().playerFSM == PlayerState.PlayerFSM.Lapse)
+        {
+            fovValue = 70;
+        }
+        else
+        {
+            fovValue = 60;
+        }
+        cam.transform.GetChild(0).gameObject.GetComponent<Camera>().fieldOfView = Mathf.Lerp(cam.transform.GetChild(0).gameObject.GetComponent<Camera>().fieldOfView, fovValue, Time.fixedDeltaTime * 10);
     }
 }

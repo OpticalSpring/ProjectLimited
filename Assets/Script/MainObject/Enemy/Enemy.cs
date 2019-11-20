@@ -26,7 +26,10 @@ public class Enemy : MonoBehaviour
         nPos.y = nPos.y + Random.Range(0.0f, 0.3f);
         gameObject.transform.position = nPos;
     }
+    protected virtual void Attack()
+    {
 
+    }
     protected void DistanceCheck()
     {
         playerDistance = Vector3.Distance(gameObject.transform.position, player.transform.position);
@@ -34,7 +37,7 @@ public class Enemy : MonoBehaviour
 
     protected void Chase()
     {
-        Turn(gameObject, player.transform.position);
+        
         gameObject.transform.Translate(Vector3.forward * movementSpeed * Time.deltaTime);
     }
 

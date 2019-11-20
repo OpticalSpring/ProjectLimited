@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8266481197054581112}
   - component: {fileID: 1128357370087467993}
   - component: {fileID: 1066924578106366840}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyType1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -48,10 +48,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: {x: 10, y: 10}
   movementSpeed: 3
-  attackDistance: 2
+  attackDistance: 8
   playerDistance: 0
   player: {fileID: 0}
   hitTime: 0
+  attackTime: 3
 --- !u!65 &1128357370087467993
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -92,7 +93,7 @@ GameObject:
   - component: {fileID: 5178493536607229431}
   - component: {fileID: 6369957193955866650}
   - component: {fileID: 3385117285499223289}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
