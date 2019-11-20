@@ -6,7 +6,7 @@ using System;
 
 public class PlayerUI : MonoBehaviour
 {
-    public GameObject player;
+     GameObject player;
     PlayerState playerState;
     public Image[] blinkStackImage;
     public Text reveralDelay;
@@ -31,6 +31,7 @@ public class PlayerUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         playerState = player.GetComponent<PlayerState>();
     }
 
@@ -50,7 +51,7 @@ public class PlayerUI : MonoBehaviour
         {
             enemyUI.SetActive(true);
             enemyNameText.text = playerState.attackTarget.name;
-            enemyHPValue = Mathf.Lerp(enemyHPValue, playerState.attackTarget.GetComponent<Enemy>().HP.x, Time.fixedDeltaTime * 2);
+            enemyHPValue = Mathf.Lerp(enemyHPValue, playerState.attackTarget.GetComponent<Enemy>().HP.x, Time.fixedDeltaTime * 10);
             enemyHP.fillAmount = enemyHPValue / playerState.attackTarget.GetComponent<Enemy>().HP.y;
         }
         else

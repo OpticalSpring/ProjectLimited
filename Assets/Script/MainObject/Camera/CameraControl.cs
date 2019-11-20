@@ -8,7 +8,7 @@ public class CameraControl : MonoBehaviour
     public float rotationSpeed;
     public float maxDistance;
     float camDistance;
-    public GameObject Player;
+    GameObject player;
     GameObject cam;
     GameObject realCamera;
     GameObject rotatePivot;
@@ -17,7 +17,7 @@ public class CameraControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Player = GameObject.Find("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         cam = gameObject.transform.GetChild(0).gameObject;
         realCamera = gameObject.transform.GetChild(0).GetChild(0).gameObject;
         rotatePivot = gameObject.transform.GetChild(1).gameObject;
@@ -40,7 +40,7 @@ public class CameraControl : MonoBehaviour
 
     void Follow()
     {
-        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, Player.transform.position, followSpeed * Time.fixedDeltaTime);
+        gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, player.transform.position, followSpeed * Time.fixedDeltaTime);
     }
 
     void DistanceCheck()

@@ -17,9 +17,8 @@ public class PlayerControl : MonoBehaviour
     GameObject playerModel;
     GameObject rayObj;
     GameObject cam;
-    Vector3 targetPos;
+    public Vector3 targetPos;
     PlayerState playerState;
-    public GameObject mugi;
     PlayerAni ani;
     // Start is called before the first frame update
     void Start()
@@ -123,7 +122,7 @@ public class PlayerControl : MonoBehaviour
 
         if (playerState.playerFSM != PlayerState.PlayerFSM.Reveral)
         {
-            if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
             {
                 AttackBack();
             }
@@ -136,7 +135,7 @@ public class PlayerControl : MonoBehaviour
                     Move();
                 }
             }
-                    Turn(playerModel, targetPos);
+            Turn(playerModel, targetPos);
         }
     }
 
@@ -204,7 +203,7 @@ public class PlayerControl : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if(playerState.attackState == 1)
+                if (playerState.attackState == 1)
                 {
                     playerState.attackNoInput = 1;
                 }
@@ -231,14 +230,12 @@ public class PlayerControl : MonoBehaviour
     {
         Attack();
         ani.attackState = 1;
-        mugi.GetComponent<MeshRenderer>().material.color = new Vector4(1, 0, 0, 1);
     }
 
     void RightAttack()
     {
         Attack();
         ani.attackState = 2;
-        mugi.GetComponent<MeshRenderer>().material.color = new Vector4(0, 0, 1, 1);
     }
 
     void Attack()
@@ -264,7 +261,6 @@ public class PlayerControl : MonoBehaviour
 
     void AttackBack()
     {
-        mugi.GetComponent<MeshRenderer>().material.color = new Vector4(1, 1, 1, 1);
         playerState.attackDelay = 0;
         playerState.attackState = 0;
         playerState.autoMoveing = 0;
@@ -353,7 +349,7 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    
+
 
     void Blink()
     {
@@ -386,14 +382,14 @@ public class PlayerControl : MonoBehaviour
 
     IEnumerator BlinkRollBackDelay()
     {
-        
+
         bool rollBackCheck = false;
         Vector3 bPos = gameObject.transform.position;
         for (int i = 0; i < 100; i++)
         {
-            if(Vector3.Distance(gameObject.transform.position,bPos) > 1f)
+            if (Vector3.Distance(gameObject.transform.position, bPos) > 1f)
             {
-                if(rollBackCheck == false)
+                if (rollBackCheck == false)
                 {
                     rollBackCheck = true;
                     ani.aniState = 0;
@@ -407,11 +403,11 @@ public class PlayerControl : MonoBehaviour
             rollBackCheck = true;
         }
     }
-    
+
 
     void Move()
     {
-        
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.fastRunSpeed * Time.fixedDeltaTime);
@@ -422,13 +418,13 @@ public class PlayerControl : MonoBehaviour
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.walkSpeed * Time.fixedDeltaTime);
             ani.movement = 1;
-            
+
         }
         else
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.slowRunSpeed * Time.fixedDeltaTime);
             ani.movement = 1;
-           
+
         }
 
         RaycastHit rayHit;
