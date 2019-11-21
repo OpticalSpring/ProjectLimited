@@ -427,7 +427,7 @@ public class PlayerControl : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.fastRunSpeed * Time.fixedDeltaTime);
-            ani.movement = 1;
+            ani.movement = 3;
 
         }
         else if (Input.GetKey(KeyCode.LeftControl))
@@ -439,7 +439,7 @@ public class PlayerControl : MonoBehaviour
         else
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.slowRunSpeed * Time.fixedDeltaTime);
-            ani.movement = 1;
+            ani.movement = 2;
 
         }
 
