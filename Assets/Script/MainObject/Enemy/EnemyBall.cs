@@ -11,6 +11,7 @@ public class EnemyBall : MonoBehaviour
     {
         StartCoroutine("CheckDelay");
         gameObject.transform.localScale = new Vector3(0, 0, 0);
+        Destroy(gameObject, 10);
     }
 
     // Update is called once per frame
