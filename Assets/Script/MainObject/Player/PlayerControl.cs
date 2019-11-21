@@ -172,13 +172,15 @@ public class PlayerControl : MonoBehaviour
 
     IEnumerator Reveral()
     {
+        playerState.playerFSM = PlayerState.PlayerFSM.Reveral;
+        playerState.reveralDelay = playerState.reveralDelayMax;
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(1f);
         ani.aniState = 3;
         if(playerState.HP.x < playerState.HP.y)
         {
             playerState.HP.x++;
         }
-        playerState.reveralDelay = playerState.reveralDelayMax;
-        playerState.playerFSM = PlayerState.PlayerFSM.Reveral;
         cam.GetComponent<CameraControl>().followSpeed = 10;
         int a = nowPosCount;
         for (int i = 0; i < 29; i++)
@@ -190,14 +192,15 @@ public class PlayerControl : MonoBehaviour
             }
             for (int j = 0; j < 2; j++)
             {
-                gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, oldPos[a], 5 * Time.deltaTime);
+                gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, oldPos[a], 5 * Time.fixedDeltaTime);
                 yield return new WaitForSecondsRealtime(0.01f);
             }
-            //yield return new WaitForSecondsRealtime(0.01f);
+            
         }
         playerState.playerFSM = PlayerState.PlayerFSM.Move;
         cam.GetComponent<CameraControl>().followSpeed = 4;
         ani.aniState = 0;
+        Time.timeScale = 1;
     }
 
     IEnumerator Lapse()

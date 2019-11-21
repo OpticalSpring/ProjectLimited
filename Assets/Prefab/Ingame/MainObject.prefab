@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: {fileID: 4969288828609343208}
-  mob: {fileID: 77883426747313077, guid: 295e13992fff13b4782741cf075c7a1a, type: 3}
+  mob: {fileID: 8075229661705091361, guid: e65ea2d0a1124b34fbcefe142f61ccc0, type: 3}
 --- !u!1 &4969288828609343208
 GameObject:
   m_ObjectHideFlags: 0
