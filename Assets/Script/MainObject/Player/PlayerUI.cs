@@ -8,6 +8,7 @@ public class PlayerUI : MonoBehaviour
 {
      GameObject player;
     PlayerState playerState;
+    public GameObject blinkOutlineEffect;
     public Image[] blinkStackImage;
     public Text reveralDelay;
     public Text lapseDelay;
@@ -133,21 +134,25 @@ public class PlayerUI : MonoBehaviour
                 blinkStackImage[0].fillAmount = (playerState.blinkDelayMax - playerState.blinkDelay) / playerState.blinkDelayMax;
                 blinkStackImage[1].fillAmount = 0;
                 blinkStackImage[2].fillAmount = 0;
+                blinkOutlineEffect.SetActive(false);
                 break;
             case 1:
                 blinkStackImage[0].fillAmount = 1;
                 blinkStackImage[1].fillAmount = (playerState.blinkDelayMax - playerState.blinkDelay) / playerState.blinkDelayMax;
                 blinkStackImage[2].fillAmount = 0;
+                blinkOutlineEffect.SetActive(true);
                 break;
             case 2:
                 blinkStackImage[0].fillAmount = 1;
                 blinkStackImage[1].fillAmount = 1;
                 blinkStackImage[2].fillAmount = (playerState.blinkDelayMax - playerState.blinkDelay) / playerState.blinkDelayMax;
+                blinkOutlineEffect.SetActive(true);
                 break;
             case 3:
                 blinkStackImage[0].fillAmount = 1;
                 blinkStackImage[1].fillAmount = 1;
                 blinkStackImage[2].fillAmount = 1;
+                blinkOutlineEffect.SetActive(true);
                 break;
         }
     }

@@ -609,11 +609,22 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4254961761240664882, guid: 8c642c4f99dfce44f9155a0118616c7f,
+        type: 3}
+      propertyPath: blinkOutlineEffect
+      value: 
+      objectReference: {fileID: 6890563925706579045}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c642c4f99dfce44f9155a0118616c7f, type: 3}
 --- !u!224 &538393155357467671 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1835389475449971391, guid: 8c642c4f99dfce44f9155a0118616c7f,
+    type: 3}
+  m_PrefabInstance: {fileID: 2161829766653200040}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6890563925706579045 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4728902590830893773, guid: 8c642c4f99dfce44f9155a0118616c7f,
     type: 3}
   m_PrefabInstance: {fileID: 2161829766653200040}
   m_PrefabAsset: {fileID: 0}
