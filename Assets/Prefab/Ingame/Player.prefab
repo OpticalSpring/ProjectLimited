@@ -145,6 +145,7 @@ MonoBehaviour:
   fastRunSpeed: 6
   rotateSpeed: 600
   blinkDistance: 7
+  hitTime: 0
   blinkStack: 0
   blinkStackMax: 3
   blinkDelay: 0
@@ -154,7 +155,7 @@ MonoBehaviour:
   lapseDelay: 0
   lapseDelayMax: 10
   attackDelay: 0
-  attackDelayMax: 3
+  attackDelayMax: 0.5
   attackNoInput: 0
   autoMoveing: 0
   stiffness: 0

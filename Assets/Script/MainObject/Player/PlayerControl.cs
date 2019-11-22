@@ -423,24 +423,29 @@ public class PlayerControl : MonoBehaviour
 
     void Move()
     {
-
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (ani.attackState == 0)
         {
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.fastRunSpeed * Time.fixedDeltaTime);
-            ani.movement = 3;
 
-        }
-        else if (Input.GetKey(KeyCode.LeftControl))
-        {
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.walkSpeed * Time.fixedDeltaTime);
-            ani.movement = 1;
 
-        }
-        else
-        {
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.slowRunSpeed * Time.fixedDeltaTime);
-            ani.movement = 2;
 
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.fastRunSpeed * Time.fixedDeltaTime);
+                ani.movement = 3;
+
+            }
+            else if (Input.GetKey(KeyCode.LeftControl))
+            {
+                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.walkSpeed * Time.fixedDeltaTime);
+                ani.movement = 1;
+
+            }
+            else
+            {
+                gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, targetPos, playerState.slowRunSpeed * Time.fixedDeltaTime);
+                ani.movement = 2;
+
+            }
         }
 
         RaycastHit rayHit;
