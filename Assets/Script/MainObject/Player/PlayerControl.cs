@@ -20,6 +20,7 @@ public class PlayerControl : MonoBehaviour
     public Vector3 targetPos;
     PlayerState playerState;
     PlayerAni ani;
+    GlitchControl glitch;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +30,7 @@ public class PlayerControl : MonoBehaviour
         playerState = GetComponent<PlayerState>();
         ani = GetComponent<PlayerAni>();
         cam = GameObject.Find("ThirdCamera");
+        glitch = cam.transform.GetChild(0).GetChild(0).gameObject.GetComponent<GlitchControl>();
         StartCoroutine("PositionSave");
 
     }
@@ -105,6 +107,7 @@ public class PlayerControl : MonoBehaviour
         {
             playerState.hitTime -= Time.fixedDeltaTime;
         }
+
     }
 
     void InputCheck()
@@ -487,8 +490,15 @@ public class PlayerControl : MonoBehaviour
         {
             return;
         }
-
+        glitch.zero = true;
+        StartCoroutine("GlitchRollback");
         playerState.hitTime = 1.0f;
         playerState.HP.x--;
+    }
+
+    IEnumerator GlitchRollback()
+    {
+        yield return new WaitForSecondsRealtime(0.2f);
+        glitch.zero = false;
     }
 }
