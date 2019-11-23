@@ -32,7 +32,7 @@ Material:
     - _GlitchflowSpeed: 100
     - _Greench: 10
     - _Redch: 10
-    - _glipower: 10
+    - _glipower: 5
     - _glitchuv: 0.1
     - _outlineonoff: 0
     - _zero: 0

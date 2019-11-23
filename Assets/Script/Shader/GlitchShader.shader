@@ -12,60 +12,59 @@
 		_glitchuv("glitch uv", float) = 0
 		_GlitchflowSpeed("glitch flowspeed", float) = 0
 	}
-		SubShader
+	SubShader
+	{
+		Cull Off ZWrite Off ZTest Always
+
+		Pass
 		{
-			Cull Off ZWrite Off ZTest Always
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
 
-			Pass
+			#include "UnityCG.cginc"
+
+			struct appdata
 			{
-				CGPROGRAM
-				#pragma vertex vert
-				#pragma fragment frag
+				float4 vertex : POSITION;
+				float2 uv : TEXCOORD0;
+			};
 
-				#include "UnityCG.cginc"
+			struct v2f
+			{
+				float2 uv : TEXCOORD0;
+				float4 vertex : SV_POSITION;
+			};
 
-				struct appdata
-				{
-					float4 vertex : POSITION;
-					float2 uv : TEXCOORD0;
-				};
+			v2f vert(appdata v)
+			{
+				v2f o;
+				o.vertex = UnityObjectToClipPos(v.vertex);
+				o.uv = v.uv;
+				return o;
+			}
 
-				struct v2f
-				{
-					float2 uv : TEXCOORD0;
-					float4 vertex : SV_POSITION;
-				};
+			sampler2D _MainTex, _MainTex6;
+			float _Redch, _Greench, _Bluech, _zero, _glipower,_GlitchflowSpeed, _glitchuv;
+			float4 _CameraDepthNormalsTexture_TexelSize;
 
-				v2f vert(appdata v)
-				{
-					v2f o;
-					o.vertex = UnityObjectToClipPos(v.vertex);
-					o.uv = v.uv;
-					return o;
-				}
-
-				sampler2D _MainTex, _MainTex6;
-				float _Redch, _Greench, _Bluech, _zero, _glipower,_GlitchflowSpeed, _glitchuv;
-				float4 _CameraDepthNormalsTexture_TexelSize;
-
-				fixed4 frag(v2f i) : SV_Target
-				{
+			fixed4 frag(v2f i) : SV_Target
+			{
 					//글리치
-					fixed4 col = tex2D(_MainTex, i.uv);
+				fixed4 col = tex2D(_MainTex, i.uv);
 				fixed4 GlitchTex = col;
 				fixed4 colR = tex2D(_MainTex, i.uv + (GlitchTex.rgb * sin(_Time.y * 25 * _zero)) / (_Redch*_glipower)* _zero);
 				fixed4 colG = tex2D(_MainTex, i.uv + (GlitchTex.rgb * cos(_Time.y * 25 * _zero)) / (_Greench*_glipower)* _zero);
 				fixed4 colB = tex2D(_MainTex, i.uv + (GlitchTex.rgb * tan(_Time.y * 25 * _zero)) / (_Bluech*_glipower)* _zero);
-					float3 Red = colR.rgb * float3(1, 0, 0);
-					float3 Green = colG.rgb * float3(0, 1, 0);
-					float3 Blue = colB.rgb * float3(0, 0, 1);
-					float4 tex = float4((Red + Green + Blue), 1);
+				float3 Red = colR.rgb * float3(1, 0, 0);
+				float3 Green = colG.rgb * float3(0, 1, 0);
+				float3 Blue = colB.rgb * float3(0, 0, 1);
+				float4 tex = float4((Red + Green + Blue), 1);
 
-					//return tex*outlineFinal;
-					return tex;
+				return tex;
 
 			}
 			ENDCG
 		}
-		}
+	}
 }
