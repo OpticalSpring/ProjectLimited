@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     public GameObject player;
     public float hitTime;
 
-    protected void Start()
+    protected virtual void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
     }
