@@ -50,7 +50,7 @@ public class CameraControl : MonoBehaviour
         RaycastHit rayHit;
         
         Debug.DrawRay(cam.transform.position, -cam.transform.forward * maxDistance, Color.red);
-        int mask = 1 << 9 | 1 << 2;
+        int mask = 1 << 9;
         mask = ~mask;
         if (Physics.SphereCast(cam.transform.position, 0.3f, -cam.transform.forward, out rayHit, maxDistance, mask))
         {
