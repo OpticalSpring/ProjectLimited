@@ -376,7 +376,7 @@ public class PlayerControl : MonoBehaviour
         playerState.blinkStack--;
         RaycastHit rayHit;
 
-        int mask = 1 << 9;
+        int mask = 1 << 9 | 1 << 2;
         mask = ~mask;
         rayObj.transform.LookAt(rotatePos.transform.position);
         Vector3 rayObjRot = rayObj.transform.eulerAngles;
@@ -453,7 +453,7 @@ public class PlayerControl : MonoBehaviour
 
         RaycastHit rayHit;
 
-        int mask = 1 << 9;
+        int mask = 1 << 9 | 1 << 2;
         mask = ~mask;
         if (Physics.Raycast(gameObject.transform.position + new Vector3(0, 1, 0), Vector3.down, out rayHit, 50, mask))
         {
