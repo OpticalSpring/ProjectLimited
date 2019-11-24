@@ -6,7 +6,6 @@ public class EnemyType3 : Enemy
 {
     public GameObject attackParent;
     public GameObject[] attackPoint;
-    public GameObject enemyBall;
     public int eventState;
     protected override void Start()
     {
@@ -123,7 +122,7 @@ public class EnemyType3 : Enemy
 
     void Attack(int i)
     {
-        GameObject temp = Instantiate(enemyBall);
+        GameObject temp = GameObject.Find("ObjectPool").GetComponent<ObjectPoolManager>().ActiveClone();
         temp.transform.position = attackPoint[i].transform.position;
         temp.transform.rotation = attackPoint[i].transform.rotation;
         temp.GetComponent<EnemyBall>().moveOn = true;

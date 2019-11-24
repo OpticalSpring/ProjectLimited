@@ -9,7 +9,6 @@ public class EnemyType2 : Enemy
     Vector3 nPos;
     float attackTimer;
     public GameObject attackPoint;
-    public GameObject enemyBall;
     bool attacked;
 
     // Update is called once per frame
@@ -60,7 +59,8 @@ public class EnemyType2 : Enemy
 
     IEnumerator DelayShot()
     {
-        GameObject temp = Instantiate(enemyBall);
+        GameObject temp = GameObject.Find("ObjectPool").GetComponent<ObjectPoolManager>().ActiveClone();
+        temp.GetComponent<EnemyBall>().moveOn = false;
         temp.transform.position = attackPoint.transform.position;
         temp.transform.rotation = attackPoint.transform.rotation;
         yield return new WaitForSeconds(1f);

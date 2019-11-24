@@ -6,12 +6,13 @@ public class EnemyBall : MonoBehaviour
 {
     public bool moveOn;
     public float movementSpeed;
-    // Start is called before the first frame update
-    void Start()
+    float delayTime;
+    float deadTime;
+
+    private void OnEnable()
     {
-        StartCoroutine("CheckDelay");
         gameObject.transform.localScale = new Vector3(0, 0, 0);
-        Destroy(gameObject, 10);
+        deadTime = 10;
     }
 
     // Update is called once per frame
@@ -19,6 +20,24 @@ public class EnemyBall : MonoBehaviour
     {
         gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, new Vector3(1, 1, 1), Time.deltaTime);
         Move();
+        if(delayTime < 0)
+        {
+            delayTime = 0.1f;
+            CollisionCheck();
+        }
+        else
+        {
+            delayTime -= Time.fixedDeltaTime;
+        }
+
+        if(deadTime < 0)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            deadTime -= Time.deltaTime;
+        }
     }
     
     void Move()
@@ -28,15 +47,8 @@ public class EnemyBall : MonoBehaviour
             gameObject.transform.Translate(Vector3.forward * Time.deltaTime * movementSpeed);
         }
     }
-
-    IEnumerator CheckDelay()
-    {
-        while (true)
-        {
-            CollisionCheck();
-            yield return new WaitForSecondsRealtime(0.1f);
-        }
-    }
+    
+    
 
     void CollisionCheck()
     {
@@ -46,7 +58,7 @@ public class EnemyBall : MonoBehaviour
             if (colliderArray[i].tag == "Player")
             {
                 colliderArray[i].gameObject.GetComponent<PlayerControl>().Hit();
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
             else if (colliderArray[i].tag == "Enemy")
             {
@@ -54,7 +66,7 @@ public class EnemyBall : MonoBehaviour
             }
             else 
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
     }
