@@ -141,8 +141,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: {x: 3, y: 3}
   walkSpeed: 1
-  slowRunSpeed: 3
-  fastRunSpeed: 6
+  slowRunSpeed: 4
+  fastRunSpeed: 8
   rotateSpeed: 600
   blinkDistance: 7
   hitTime: 0
