@@ -209,6 +209,14 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   nowPosCount: 0
   targetPos: {x: 0, y: 0, z: 0}
+  blinkEffect1: {fileID: 2451711153215190149, guid: 1bb37b0e11d337c4b9a72e1260a10403,
+    type: 3}
+  blinkEffect2: {fileID: 8512859570419392160, guid: 031e444dc2f7c6044b82dc33bc5ba170,
+    type: 3}
+  reveralEffect1: {fileID: 9004346355827895070, guid: f044099d18b8b6242afa9f05987e2f31,
+    type: 3}
+  reveralEffect2: {fileID: 959936609794885430, guid: 5b31cc333aa3e5d428c9aa28110783ea,
+    type: 3}
 --- !u!114 &2027908229334227922
 MonoBehaviour:
   m_ObjectHideFlags: 0

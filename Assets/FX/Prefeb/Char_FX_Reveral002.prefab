@@ -109,6 +109,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1448721247473895846, guid: 39838a7939571ca408fd5aed9faac845,
+        type: 3}
+      propertyPath: useUnscaledTime
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39838a7939571ca408fd5aed9faac845, type: 3}
 --- !u!4 &6998558902083915958 stripped
@@ -198,6 +203,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Parameters.colorGradient.key1.b
       value: 0.0754717
+      objectReference: {fileID: 0}
+    - target: {fileID: 1442642307339602284, guid: b1945e0462df6c745b07b49cd57af38e,
+        type: 3}
+      propertyPath: m_Autodestruct
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b1945e0462df6c745b07b49cd57af38e, type: 3}

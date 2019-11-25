@@ -21,6 +21,13 @@ public class PlayerControl : MonoBehaviour
     PlayerState playerState;
     PlayerAni ani;
     GlitchControl glitch;
+
+
+    public GameObject blinkEffect1;
+    public GameObject blinkEffect2;
+    public GameObject reveralEffect1;
+    public GameObject reveralEffect2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -175,6 +182,15 @@ public class PlayerControl : MonoBehaviour
 
     IEnumerator Reveral()
     {
+        GameObject effect = Instantiate(reveralEffect1);
+        effect.transform.position = gameObject.transform.position;
+        effect.transform.rotation = gameObject.transform.rotation;
+
+        GameObject effect2 = Instantiate(reveralEffect2);
+        effect2.transform.position = gameObject.transform.position;
+        effect2.transform.rotation = gameObject.transform.rotation;
+        effect2.transform.parent = gameObject.transform;
+
         playerState.playerFSM = PlayerState.PlayerFSM.Reveral;
         playerState.reveralDelay = playerState.reveralDelayMax;
         Time.timeScale = 0;
@@ -204,6 +220,8 @@ public class PlayerControl : MonoBehaviour
         cam.GetComponent<CameraControl>().followSpeed = 4;
         ani.aniState = 0;
         Time.timeScale = 1;
+        Destroy(effect,2);
+        Destroy(effect2, 1);
     }
 
     IEnumerator Lapse()
@@ -372,6 +390,9 @@ public class PlayerControl : MonoBehaviour
 
     void Blink()
     {
+        GameObject effect = Instantiate(blinkEffect1);
+        effect.transform.position = gameObject.transform.position;
+        effect.transform.rotation = gameObject.transform.rotation;
         ani.aniState = 2;
         playerState.blinkStack--;
         RaycastHit rayHit;
@@ -396,12 +417,16 @@ public class PlayerControl : MonoBehaviour
             gameObject.transform.position = rotatePos.transform.position;
             gameObject.transform.position += new Vector3(0, 1f, 0);
         }
+        Destroy(effect, 2);
         StartCoroutine("BlinkRollBackDelay");
     }
 
     IEnumerator BlinkRollBackDelay()
     {
-
+        yield return new WaitForSeconds(0.01f);
+        GameObject effect = Instantiate(blinkEffect2);
+        effect.transform.position = gameObject.transform.position;
+        effect.transform.rotation = gameObject.transform.rotation;
         bool rollBackCheck = false;
         Vector3 bPos = gameObject.transform.position;
         for (int i = 0; i < 100; i++)
@@ -421,6 +446,7 @@ public class PlayerControl : MonoBehaviour
             ani.aniState = 0;
             rollBackCheck = true;
         }
+        Destroy(effect, 2);
     }
 
 
@@ -494,11 +520,13 @@ public class PlayerControl : MonoBehaviour
         StartCoroutine("GlitchRollback");
         playerState.hitTime = 1.0f;
         playerState.HP.x--;
+        ani.aniState = 4;
     }
 
     IEnumerator GlitchRollback()
     {
         yield return new WaitForSecondsRealtime(0.2f);
         glitch.zero = false;
+        ani.aniState = 0;
     }
 }
