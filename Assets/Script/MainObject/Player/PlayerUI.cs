@@ -24,11 +24,13 @@ public class PlayerUI : MonoBehaviour
     public Text enemyNameText;
     public GameObject bossUI;
     public Image bossHP;
+    public Text bossHPText;
     public Text bossNameText;
     public Vector3 maskTargetPos;
     public Vector3 smartWatchScale;
     public float HPValue;
     public float enemyHPValue;
+    public float bossHPValue;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,6 +60,24 @@ public class PlayerUI : MonoBehaviour
         else
         {
             enemyUI.SetActive(false);
+        }
+
+        if (playerState.bossTarget != null)
+        {
+            int bossHPX = (int)playerState.bossTarget.GetComponent<Enemy>().HP.x;
+            bossUI.SetActive(true);
+            bossNameText.text = playerState.bossTarget.name;
+            bossHPValue = Mathf.Lerp(bossHPValue, bossHPX % 1000%100%10, Time.fixedDeltaTime * 10);
+            if (bossHPX % 1000 % 100 % 10 == 0)
+            {
+                bossHPValue = 10;
+            }
+            bossHP.fillAmount = bossHPValue / 10;
+            bossHPText.text = ""+bossHPX / 10;
+        }
+        else
+        {
+            bossUI.SetActive(false);
         }
     }
 

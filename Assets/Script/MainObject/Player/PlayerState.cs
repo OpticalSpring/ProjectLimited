@@ -40,6 +40,7 @@ public class PlayerState : MonoBehaviour
 
     public GameObject attackPoint;
     public GameObject attackTarget;
+    public GameObject bossTarget;
     public enum PlayerFSM
     {
         Move,

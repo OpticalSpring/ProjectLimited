@@ -2550,7 +2550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4a440704e6f2a44682df11d95e51f12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  blinkOutlineEffect: {fileID: 4728902590830893773}
   blinkStackImage:
   - {fileID: 1835389473924084097}
   - {fileID: 1835389474057866474}
@@ -2573,9 +2573,10 @@ MonoBehaviour:
   enemyUI: {fileID: 1835389474342729815}
   enemyHP: {fileID: 1835389474497985009}
   enemyNameText: {fileID: 1276581640900806665}
-  bossUI: {fileID: 0}
-  bossHP: {fileID: 0}
-  bossNameText: {fileID: 0}
+  bossUI: {fileID: 1835389473775370117}
+  bossHP: {fileID: 1835389475659064628}
+  bossHPText: {fileID: 1835389474509046064}
+  bossNameText: {fileID: 1758767567649740389}
   maskTargetPos: {x: 0, y: 0, z: 0}
   smartWatchScale: {x: 0, y: 0, z: 0}
   HPValue: 0
@@ -2716,10 +2717,10 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: ce10b902f5458114d93165286581122f, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0

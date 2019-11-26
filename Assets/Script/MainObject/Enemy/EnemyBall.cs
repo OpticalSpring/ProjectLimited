@@ -20,15 +20,15 @@ public class EnemyBall : MonoBehaviour
     {
         gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, new Vector3(1, 1, 1), Time.deltaTime);
         Move();
-        if(delayTime < 0)
-        {
-            delayTime = 0.1f;
-            CollisionCheck();
-        }
-        else
-        {
-            delayTime -= Time.fixedDeltaTime;
-        }
+        //if(delayTime < 0)
+        //{
+        //    delayTime = 0.1f;
+        //    //CollisionCheck();
+        //}
+        //else
+        //{
+        //    delayTime -= Time.fixedDeltaTime;
+        //}
 
         if(deadTime < 0)
         {
@@ -47,12 +47,29 @@ public class EnemyBall : MonoBehaviour
             gameObject.transform.Translate(Vector3.forward * Time.deltaTime * movementSpeed);
         }
     }
-    
-    
+
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            other.gameObject.GetComponent<PlayerControl>().Hit();
+            gameObject.SetActive(false);
+        }
+        else if (other.tag == "Enemy")
+        {
+
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
 
     void CollisionCheck()
     {
-        Collider[] colliderArray = Physics.OverlapSphere(gameObject.transform.position, 0.25f);
+        Collider[] colliderArray = Physics.OverlapSphere(gameObject.transform.position, 0.1f);
         for (int i = 0; i < colliderArray.Length; i++)
         {
             if (colliderArray[i].tag == "Player")

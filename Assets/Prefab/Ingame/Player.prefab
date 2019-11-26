@@ -107,7 +107,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.3
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -163,6 +163,7 @@ MonoBehaviour:
   attackState: 0
   attackPoint: {fileID: 3685231832207703080}
   attackTarget: {fileID: 0}
+  bossTarget: {fileID: 0}
   playerFSM: 0
 --- !u!114 &7692196921912381103
 MonoBehaviour:
@@ -300,6 +301,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 0a10c38e19c41b647ae433ec3a49a591, type: 2}
+    - target: {fileID: 13700002, guid: 9bc4635d198ff744c9a42a34c6a2c2ec, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1ae7596c69adeba48a064afdf1432817, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bc4635d198ff744c9a42a34c6a2c2ec, type: 3}
 --- !u!4 &2954696038557512782 stripped
