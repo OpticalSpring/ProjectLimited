@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 78dcdb2be409e0c4e80b227e85d9ec42
+guid: 7d0f8c5a0d1563c40b678c21ed42e5a6
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -94,23 +94,24 @@ ModelImporter:
     100176: Bip001 Xtra01Opp07
     100178: Bip001 Xtra01Opp08
     100180: Bip001 Xtra01OppNub
-    100182: Box001
-    100184: Box002
+    100182: Bone001
+    100184: Char
     100186: //RootNode
     100188: L_elbow
     100190: L_hip
     100192: L_knee
     100194: L_shoulder
-    100196: Point001
-    100198: Point002
-    100200: Point003
-    100202: Point004
-    100204: Point006
-    100206: R_elbow
-    100208: R_hip
-    100210: R_knee
-    100212: R_shoulder
-    100214: Sphere001
+    100196: Object014
+    100198: Point001
+    100200: Point002
+    100202: Point003
+    100204: Point004
+    100206: Point006
+    100208: Point007
+    100210: R_elbow
+    100212: R_hip
+    100214: R_knee
+    100216: R_shoulder
     400000: Bip001
     400002: Bip001 Footsteps
     400004: Bip001 Head
@@ -202,40 +203,32 @@ ModelImporter:
     400176: Bip001 Xtra01Opp07
     400178: Bip001 Xtra01Opp08
     400180: Bip001 Xtra01OppNub
-    400182: Box001
-    400184: Box002
+    400182: Bone001
+    400184: Char
     400186: //RootNode
     400188: L_elbow
     400190: L_hip
     400192: L_knee
     400194: L_shoulder
-    400196: Point001
-    400198: Point002
-    400200: Point003
-    400202: Point004
-    400204: Point006
-    400206: R_elbow
-    400208: R_hip
-    400210: R_knee
-    400212: R_shoulder
-    400214: Sphere001
-    2100000: 03 - Default
-    2100002: 02 - Default
-    2100004: dfgere_02___Default
-    2100006: dfgere_03___Default
-    2100008: ri_03___Default
-    2100010: 10 - Default
-    2100012: No Name
-    2300000: Box001
-    2300002: Box002
-    3300000: Box001
-    3300002: Box002
-    4300000: Sphere001
-    4300002: Box001
-    4300004: Box002
-    7400000: Take 001
+    400196: Object014
+    400198: Point001
+    400200: Point002
+    400202: Point003
+    400204: Point004
+    400206: Point006
+    400208: Point007
+    400210: R_elbow
+    400212: R_hip
+    400214: R_knee
+    400216: R_shoulder
+    2100000: 'Material #640'
+    2100002: 04 - Default
+    4300000: Char
+    4300002: Object014
+    7400000: FastRun_f
     9500000: //RootNode
-    13700000: Sphere001
+    13700000: Char
+    13700002: Object014
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -263,7 +256,35 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: FastRun_f
+      takeName: Take 001
+      firstFrame: 100
+      lastFrame: 116
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

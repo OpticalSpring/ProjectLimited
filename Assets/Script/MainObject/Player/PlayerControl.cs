@@ -45,6 +45,11 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(playerState.HP.x <= 0)
+        {
+            ani.aniState = 10;
+            return;
+        }
         DelayCheck();
         InputCheck();
     }

@@ -20,17 +20,17 @@ public class EnemyBall : MonoBehaviour
     {
         gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, new Vector3(1, 1, 1), Time.deltaTime);
         Move();
-        //if(delayTime < 0)
-        //{
-        //    delayTime = 0.1f;
-        //    //CollisionCheck();
-        //}
-        //else
-        //{
-        //    delayTime -= Time.fixedDeltaTime;
-        //}
+        if (delayTime < 0)
+        {
+            delayTime = 0.1f;
+            CollisionCheck();
+        }
+        else
+        {
+            delayTime -= Time.fixedDeltaTime;
+        }
 
-        if(deadTime < 0)
+        if (deadTime < 0)
         {
             gameObject.SetActive(false);
         }
@@ -49,22 +49,6 @@ public class EnemyBall : MonoBehaviour
     }
 
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            other.gameObject.GetComponent<PlayerControl>().Hit();
-            gameObject.SetActive(false);
-        }
-        else if (other.tag == "Enemy")
-        {
-
-        }
-        else
-        {
-            gameObject.SetActive(false);
-        }
-    }
 
 
     void CollisionCheck()
