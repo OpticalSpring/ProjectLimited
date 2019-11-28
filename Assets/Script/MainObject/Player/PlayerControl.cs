@@ -28,6 +28,8 @@ public class PlayerControl : MonoBehaviour
     public GameObject reveralEffect1;
     public GameObject reveralEffect2;
 
+
+    public Material rimMat;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +47,7 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerState.HP.x <= 0)
+        if (playerState.HP.x <= 0)
         {
             ani.aniState = 10;
             return;
@@ -115,7 +117,7 @@ public class PlayerControl : MonoBehaviour
             }
         }
 
-        if(playerState.hitTime > 0)
+        if (playerState.hitTime > 0)
         {
             playerState.hitTime -= Time.fixedDeltaTime;
         }
@@ -124,7 +126,7 @@ public class PlayerControl : MonoBehaviour
 
     void InputCheck()
     {
-        if(playerState.hitTime > 0.5f)
+        if (playerState.hitTime > 0.5f)
         {
             return;
         }
@@ -201,7 +203,7 @@ public class PlayerControl : MonoBehaviour
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(1f);
         ani.aniState = 3;
-        if(playerState.HP.x < playerState.HP.y)
+        if (playerState.HP.x < playerState.HP.y)
         {
             playerState.HP.x++;
         }
@@ -219,13 +221,13 @@ public class PlayerControl : MonoBehaviour
                 gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, oldPos[a], 5 * Time.fixedDeltaTime);
                 yield return new WaitForSecondsRealtime(0.01f);
             }
-            
+
         }
         playerState.playerFSM = PlayerState.PlayerFSM.Move;
         cam.GetComponent<CameraControl>().followSpeed = 4;
         ani.aniState = 0;
         Time.timeScale = 1;
-        Destroy(effect,2);
+        Destroy(effect, 2);
         Destroy(effect2, 1);
     }
 
@@ -234,9 +236,34 @@ public class PlayerControl : MonoBehaviour
         playerState.lapseDelay = playerState.lapseDelayMax;
         playerState.playerFSM = PlayerState.PlayerFSM.Lapse;
         Time.timeScale = 0.2f;
-        yield return new WaitForSecondsRealtime(5f);
+        GameObject[] rimObj = new GameObject[10];
+        for (int i = 0; i < 10; i++)
+        {
+            rimObj[i] = Instantiate(gameObject.transform.GetChild(0).gameObject);
+            rimObj[i].transform.position = gameObject.transform.GetChild(0).position;
+            rimObj[i].transform.rotation = gameObject.transform.GetChild(0).rotation;
+            rimObj[i].transform.GetChild(2).gameObject.GetComponent<SkinnedMeshRenderer>().material = rimMat;
+            rimObj[i].transform.GetChild(3).gameObject.GetComponent<SkinnedMeshRenderer>().material = rimMat;
+            ani.SetCopyAni(rimObj[i].GetComponent<Animator>());
+            yield return new WaitForSecondsRealtime(0.5f);
+        }
         Time.timeScale = 1;
         playerState.playerFSM = PlayerState.PlayerFSM.Move;
+        Vector4 col = new Vector4(1, 1, 1, 1);
+        for (int j = 0; j < 20; j++)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                col = Vector4.Lerp(col, Vector4.zero, Time.fixedDeltaTime);
+                rimObj[i].transform.GetChild(2).gameObject.GetComponent<SkinnedMeshRenderer>().material.color = col;
+                rimObj[i].transform.GetChild(3).gameObject.GetComponent<SkinnedMeshRenderer>().material.color = col;
+                yield return new WaitForSecondsRealtime(0.01f);
+            }
+        }
+        for (int i = 0; i < 10; i++)
+        {
+            Destroy(rimObj[i]);
+        }
     }
 
     void AttackCheck()
@@ -298,7 +325,7 @@ public class PlayerControl : MonoBehaviour
                 {
                     playerState.attackTarget = colliderArray[i].gameObject;
                 }
-                
+
                 colliderArray[i].gameObject.GetComponent<Enemy>().Hit();
             }
         }
@@ -520,12 +547,12 @@ public class PlayerControl : MonoBehaviour
 
     public void Hit()
     {
-        if(playerState.playerFSM == PlayerState.PlayerFSM.Reveral)
+        if (playerState.playerFSM == PlayerState.PlayerFSM.Reveral)
         {
             return;
         }
 
-        if(playerState.hitTime > 0)
+        if (playerState.hitTime > 0)
         {
             return;
         }

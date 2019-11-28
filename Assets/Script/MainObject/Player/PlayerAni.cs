@@ -28,4 +28,12 @@ public class PlayerAni : MonoBehaviour
         ani.SetInteger("AniState", aniState);
         ani.SetInteger("AttackState", attackState);
     }
+
+    public void SetCopyAni(Animator copy)
+    {
+        copy.SetFloat("Movement", realMovement);
+        copy.SetInteger("AniState", aniState);
+        copy.SetInteger("AttackState", attackState);
+        copy.speed = 0;
+    }
 }

@@ -218,6 +218,7 @@ MonoBehaviour:
     type: 3}
   reveralEffect2: {fileID: 959936609794885430, guid: 5b31cc333aa3e5d428c9aa28110783ea,
     type: 3}
+  rimMat: {fileID: 2100000, guid: 23877b069cbfbdb4baa215d31375d972, type: 2}
 --- !u!114 &2027908229334227922
 MonoBehaviour:
   m_ObjectHideFlags: 0
