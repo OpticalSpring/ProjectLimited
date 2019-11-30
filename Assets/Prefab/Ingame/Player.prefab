@@ -151,9 +151,9 @@ MonoBehaviour:
   blinkDelay: 0
   blinkDelayMax: 3
   reveralDelay: 0
-  reveralDelayMax: 10
+  reveralDelayMax: 20
   lapseDelay: 0
-  lapseDelayMax: 10
+  lapseDelayMax: 20
   attackDelay: 0
   attackDelayMax: 0.5
   attackNoInput: 0
@@ -298,14 +298,14 @@ PrefabInstance:
       propertyPath: m_UpdateMode
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 13700000, guid: b5d0afc5d08f3c2499665405d9089f91, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0a10c38e19c41b647ae433ec3a49a591, type: 2}
     - target: {fileID: 13700002, guid: b5d0afc5d08f3c2499665405d9089f91, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1ae7596c69adeba48a064afdf1432817, type: 2}
+    - target: {fileID: 13700000, guid: b5d0afc5d08f3c2499665405d9089f91, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0a10c38e19c41b647ae433ec3a49a591, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5d0afc5d08f3c2499665405d9089f91, type: 3}
 --- !u!4 &7033374766275932489 stripped

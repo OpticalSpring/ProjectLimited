@@ -95,9 +95,9 @@ public class EventManager : MonoBehaviour
                 StartCoroutine("Event_13");
                 break;
             case 14:
-                StartCoroutine("Event_14");
                 break;
             case 15:
+                StartCoroutine("Event_15");
                 break;
             case 16:
                 break;
@@ -192,7 +192,7 @@ public class EventManager : MonoBehaviour
         
     }
 
-    IEnumerator Event_14()
+    IEnumerator Event_15()
     {
         eventNumber++;
         mobGroup.transform.GetChild(7).gameObject.SetActive(true);

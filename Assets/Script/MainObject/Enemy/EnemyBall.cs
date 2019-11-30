@@ -11,14 +11,14 @@ public class EnemyBall : MonoBehaviour
 
     private void OnEnable()
     {
-        gameObject.transform.localScale = new Vector3(0, 0, 0);
+        gameObject.transform.GetChild(0).GetChild(0).localScale = new Vector3(0, 0, 0);
         deadTime = 10;
     }
 
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, new Vector3(1, 1, 1), Time.deltaTime);
+        gameObject.transform.GetChild(0).GetChild(0).localScale = Vector3.Lerp(gameObject.transform.GetChild(0).GetChild(0).localScale, new Vector3(1, 1, 1), Time.deltaTime);
         Move();
         if (delayTime < 0)
         {
