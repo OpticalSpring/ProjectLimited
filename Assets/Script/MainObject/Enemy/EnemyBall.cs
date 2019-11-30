@@ -65,6 +65,10 @@ public class EnemyBall : MonoBehaviour
             {
                 
             }
+            else if (colliderArray[i].tag == "Trigger")
+            {
+
+            }
             else 
             {
                 gameObject.SetActive(false);

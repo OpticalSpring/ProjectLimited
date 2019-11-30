@@ -227,7 +227,7 @@ public class PlayerControl : MonoBehaviour
         cam.GetComponent<CameraControl>().followSpeed = 4;
         ani.aniState = 0;
         Time.timeScale = 1;
-        Destroy(effect, 2);
+        Destroy(effect, 1);
         Destroy(effect2, 1);
     }
 

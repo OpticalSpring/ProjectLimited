@@ -103,6 +103,26 @@ PrefabInstance:
       propertyPath: useUnscaledTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5086655855770858716, guid: 0418f163df8a7a74fa7372a60a7fe9ad,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.8537736
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086655855770858716, guid: 0418f163df8a7a74fa7372a60a7fe9ad,
+        type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.9364233
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086655855770858716, guid: 0418f163df8a7a74fa7372a60a7fe9ad,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5086655855770858716, guid: 0418f163df8a7a74fa7372a60a7fe9ad,
+        type: 3}
+      propertyPath: NoiseModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6553355184686509836, guid: 0418f163df8a7a74fa7372a60a7fe9ad,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.r
