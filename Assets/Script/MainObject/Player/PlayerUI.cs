@@ -6,7 +6,7 @@ using System;
 
 public class PlayerUI : MonoBehaviour
 {
-     GameObject player;
+    GameObject player;
     PlayerState playerState;
     public GameObject blinkOutlineEffect;
     public Image[] blinkStackImage;
@@ -31,11 +31,20 @@ public class PlayerUI : MonoBehaviour
     public float HPValue;
     public float enemyHPValue;
     public float bossHPValue;
+    Animator[] blinkStackAnimator = new Animator[3];
+    Image[] skillEffectImage = new Image[3];
+    float[] skillEffectValue = new float[3];
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerState = player.GetComponent<PlayerState>();
+        blinkStackAnimator[0] = blinkStackImage[0].gameObject.GetComponent<Animator>();
+        blinkStackAnimator[1] = blinkStackImage[1].gameObject.GetComponent<Animator>();
+        blinkStackAnimator[2] = blinkStackImage[2].gameObject.GetComponent<Animator>();
+        skillEffectImage[0] = blinkOutlineEffect.GetComponent<Image>();
+        skillEffectImage[1] = reveralOutline[0].GetComponent<Image>();
+        skillEffectImage[2] = lapseOutline[0].GetComponent<Image>();
     }
 
     // Update is called once per frame
@@ -46,6 +55,15 @@ public class PlayerUI : MonoBehaviour
         SetHP();
         SetSmartWatch();
         SetEnemyHP();
+        SetSkillEffectColor();
+    }
+
+    void SetSkillEffectColor()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            skillEffectImage[i].color = Vector4.Lerp(skillEffectImage[i].color, new Vector4(1, 1, 1, skillEffectValue[i]), Time.fixedDeltaTime * 2);
+        }
     }
 
     void SetEnemyHP()
@@ -67,13 +85,13 @@ public class PlayerUI : MonoBehaviour
             int bossHPX = (int)playerState.bossTarget.GetComponent<Enemy>().HP.x;
             bossUI.SetActive(true);
             bossNameText.text = playerState.bossTarget.name;
-            bossHPValue = Mathf.Lerp(bossHPValue, bossHPX % 1000%100%10, Time.fixedDeltaTime * 10);
+            bossHPValue = Mathf.Lerp(bossHPValue, bossHPX % 1000 % 100 % 10, Time.fixedDeltaTime * 10);
             if (bossHPX % 1000 % 100 % 10 == 0)
             {
                 bossHPValue = 10;
             }
             bossHP.fillAmount = bossHPValue / 10;
-            bossHPText.text = ""+bossHPX / 10;
+            bossHPText.text = "" + bossHPX / 10;
         }
         else
         {
@@ -84,7 +102,7 @@ public class PlayerUI : MonoBehaviour
     void SetHP()
     {
         HPValue = Mathf.Lerp(HPValue, playerState.HP.x, Time.fixedDeltaTime * 2);
-        HP.fillAmount = HPValue/ playerState.HP.y;
+        HP.fillAmount = HPValue / playerState.HP.y;
     }
 
     void SetSmartWatch()
@@ -120,32 +138,32 @@ public class PlayerUI : MonoBehaviour
         reveralDelay.text = "" + (int)playerState.reveralDelay;
         lapseDelay.text = "" + (int)playerState.lapseDelay;
 
-        if(playerState.reveralDelay <= 0)
+        if (playerState.reveralDelay <= 0)
         {
-            reveralOutline[0].SetActive(false);
-            reveralOutline[1].SetActive(true);
+            skillEffectValue[1] = 1;
+            reveralOutline[1].SetActive(false);
             reveralOutline[2].SetActive(true);
         }
         else
         {
-            reveralOutline[0].SetActive(true);
-            reveralOutline[1].SetActive(false);
+            skillEffectValue[1] = 0;
+            reveralOutline[1].SetActive(true);
             reveralOutline[2].SetActive(false);
         }
-        if(playerState.lapseDelay <= 0)
+        if (playerState.lapseDelay <= 0)
         {
-            lapseOutline[0].SetActive(false);
-            lapseOutline[1].SetActive(true);
+            skillEffectValue[2] = 1;
+            lapseOutline[1].SetActive(false);
             lapseOutline[2].SetActive(true);
         }
         else
         {
-            lapseOutline[0].SetActive(true);
-            lapseOutline[1].SetActive(false);
+            skillEffectValue[2] = 0;
+            lapseOutline[1].SetActive(true);
             lapseOutline[2].SetActive(false);
         }
     }
-
+    public int blinkStackLast = 0;
     void SetBlink()
     {
         switch (playerState.blinkStack)
@@ -154,25 +172,46 @@ public class PlayerUI : MonoBehaviour
                 blinkStackImage[0].fillAmount = (playerState.blinkDelayMax - playerState.blinkDelay) / playerState.blinkDelayMax;
                 blinkStackImage[1].fillAmount = 0;
                 blinkStackImage[2].fillAmount = 0;
-                blinkOutlineEffect.SetActive(false);
+                blinkStackAnimator[0].SetBool("Flash", false);
+                blinkStackLast = 0;
+                skillEffectValue[0] = 0;
                 break;
             case 1:
                 blinkStackImage[0].fillAmount = 1;
                 blinkStackImage[1].fillAmount = (playerState.blinkDelayMax - playerState.blinkDelay) / playerState.blinkDelayMax;
                 blinkStackImage[2].fillAmount = 0;
-                blinkOutlineEffect.SetActive(true);
+                if (blinkStackLast < 1)
+                {
+                    blinkStackAnimator[0].SetBool("Flash", true);
+                    blinkStackAnimator[1].SetBool("Flash", false);
+                }
+                blinkStackLast = 1;
+                skillEffectValue[0] = 1;
                 break;
             case 2:
                 blinkStackImage[0].fillAmount = 1;
                 blinkStackImage[1].fillAmount = 1;
                 blinkStackImage[2].fillAmount = (playerState.blinkDelayMax - playerState.blinkDelay) / playerState.blinkDelayMax;
-                blinkOutlineEffect.SetActive(true);
+                if (blinkStackLast < 2)
+                {
+                    blinkStackAnimator[0].SetBool("Flash", false);
+                    blinkStackAnimator[1].SetBool("Flash", true);
+                    blinkStackAnimator[2].SetBool("Flash", false);
+                }
+                blinkStackLast = 2;
+                skillEffectValue[0] = 1;
                 break;
             case 3:
                 blinkStackImage[0].fillAmount = 1;
                 blinkStackImage[1].fillAmount = 1;
                 blinkStackImage[2].fillAmount = 1;
-                blinkOutlineEffect.SetActive(true);
+                if (blinkStackLast < 3)
+                {
+                    blinkStackAnimator[1].SetBool("Flash", false);
+                    blinkStackAnimator[2].SetBool("Flash", true);
+                }
+                blinkStackLast = 3;
+                skillEffectValue[0] = 1;
                 break;
         }
     }
