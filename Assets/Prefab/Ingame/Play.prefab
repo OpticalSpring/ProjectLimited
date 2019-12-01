@@ -2610,7 +2610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4a440704e6f2a44682df11d95e51f12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blinkOutlineEffect: {fileID: 4728902590830893773}
+  blinkOutlineEffect: {fileID: 185399860663367298}
   blinkStackImage:
   - {fileID: 1835389473924084097}
   - {fileID: 1835389474057866474}
@@ -2621,12 +2621,12 @@ MonoBehaviour:
   smartWatchSpeedText: {fileID: 8555456744755172444}
   HP: {fileID: 1835389475379969995}
   reveralOutline:
-  - {fileID: 1835389474373897931}
-  - {fileID: 1835389475518135775}
+  - {fileID: 2413950296363220490}
+  - {fileID: 5140881251206731209}
   - {fileID: 8035081936540227282}
   lapseOutline:
-  - {fileID: 1835389474486158721}
-  - {fileID: 1835389474029135487}
+  - {fileID: 4676479923840867406}
+  - {fileID: 8862859490853476201}
   - {fileID: 4193737979099314254}
   smartWatchMask: {fileID: 4926005861115990282}
   smartWatchObject: {fileID: 1835389474628618714}
@@ -2642,6 +2642,7 @@ MonoBehaviour:
   HPValue: 0
   enemyHPValue: 0
   bossHPValue: 0
+  blinkStackLast: 0
 --- !u!1 &1835389475518135775
 GameObject:
   m_ObjectHideFlags: 0
