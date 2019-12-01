@@ -10,7 +10,6 @@ public class EventManager : MonoBehaviour
 
     public GameObject mobGroup;
     public GameObject wallGroup;
-    public GameObject checkPos;
     // Start is called before the first frame update
     void Start()
     {
