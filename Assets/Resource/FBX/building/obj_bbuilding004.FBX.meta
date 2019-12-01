@@ -1,21 +1,27 @@
 fileFormatVersion: 2
-guid: 9d1bc783565a4dc4e8a62c332b4918b1
+guid: 3377797fde541be4abe95bfa391c71c3
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Box002
+    100000: bbuilding004
     100002: //RootNode
-    100004: Shape013
-    400000: Box002
+    100004: Object009
+    100006: Object010
+    400000: bbuilding004
     400002: //RootNode
-    400004: Shape013
+    400004: Object009
+    400006: Object010
     2100000: 'Material #0'
-    2300000: Box002
-    2300002: Shape013
-    3300000: Box002
-    3300002: Shape013
-    4300000: Box002
-    4300002: Shape013
+    2100002: 'Material #1'
+    2300000: bbuilding004
+    2300002: Object009
+    2300004: Object010
+    3300000: bbuilding004
+    3300002: Object009
+    3300004: Object010
+    4300000: bbuilding004
+    4300002: Object009
+    4300004: Object010
   externalObjects: {}
   materials:
     importMaterials: 1

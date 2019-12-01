@@ -3,26 +3,26 @@ guid: 94c180f1e51841242b694b58624b9b2f
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Box020
-    100002: Box024
-    100004: Box025
+    100000: Box024
+    100002: Box025
+    100004: building003
     100006: //RootNode
     100008: Shape021
-    400000: Box020
-    400002: Box024
-    400004: Box025
+    400000: Box024
+    400002: Box025
+    400004: building003
     400006: //RootNode
     400008: Shape021
     2100000: 'Material #0'
-    2300000: Box020
-    2300002: Box024
-    2300004: Box025
+    2300000: Box024
+    2300002: Box025
+    2300004: building003
     2300006: Shape021
-    3300000: Box020
-    3300002: Box024
-    3300004: Box025
+    3300000: Box024
+    3300002: Box025
+    3300004: building003
     3300006: Shape021
-    4300000: Box020
+    4300000: building003
     4300002: Shape021
     4300004: Box024
     4300006: Box025
