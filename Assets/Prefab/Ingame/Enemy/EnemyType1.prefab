@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f26f873739c6b504fba436ff45ebcd17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: "<color=#ff0000ff>10\u5F0F</color> Rush"
   HP: {x: 10, y: 10}
   movementSpeed: 3
   attackDistance: 8

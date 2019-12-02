@@ -77,6 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a227458ee52a1041aa9d31cf4230dec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: "<color=#ff0000ff>20\u5F0F</color> Bullpup"
   HP: {x: 10, y: 10}
   movementSpeed: 3
   attackDistance: 12

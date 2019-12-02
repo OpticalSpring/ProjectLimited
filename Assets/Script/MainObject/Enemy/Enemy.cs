@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public string name;
     public Vector2 HP;
     public float movementSpeed;
     public float attackDistance;
@@ -13,6 +14,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Start()
     {
+        gameObject.name = name;
         player = GameObject.FindGameObjectWithTag("Player");
     }
 

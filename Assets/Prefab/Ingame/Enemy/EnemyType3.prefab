@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afc40b5cf614320438309e5ab45678aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: "<color=#ff0000ff>\u96F6\u5F0F</color> SteellRain"
   HP: {x: 1000, y: 1000}
   movementSpeed: 3
   attackDistance: 10

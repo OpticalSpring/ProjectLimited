@@ -299,12 +299,14 @@ public class PlayerControl : MonoBehaviour
     {
         Attack();
         ani.attackState = 1;
+        playerState.attackState = 1;
     }
 
     void RightAttack()
     {
         Attack();
         ani.attackState = 2;
+        playerState.attackState = 2;
     }
 
     void Attack()
