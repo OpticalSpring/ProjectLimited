@@ -10,8 +10,10 @@ public class DestroyMaterial : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+       if(GetComponent<MeshRenderer>())
         mat = gameObject.GetComponent<MeshRenderer>().material;
+        if (GetComponent<SkinnedMeshRenderer>())
+            mat = gameObject.GetComponent<SkinnedMeshRenderer>().material;
     }
 
     // Update is called once per frame

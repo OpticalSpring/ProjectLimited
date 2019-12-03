@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
         if(HP.x <= 0)
         {
             Destroy(gameObject.transform.GetChild(0).gameObject, 2);
-            gameObject.transform.GetChild(0).gameObject.GetComponent<DestroyMaterial>().enabled = true;
+            gameObject.transform.GetChild(0).GetChild(1).gameObject.GetComponent<DestroyMaterial>().enabled = true;
             gameObject.transform.GetChild(0).parent = null;
             Destroy(gameObject);
         }
