@@ -88,7 +88,7 @@ Material:
     - _rot2: 0
     - _tex1U: 0
     - _tex1V: 0
-    - _tex2U: 0.7
+    - _tex2U: 1
     - _tex2V: 0
     - _tex3U: 0
     - _tex3V: 0
