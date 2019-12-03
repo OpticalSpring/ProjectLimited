@@ -7,6 +7,7 @@ public class EnemyType3 : Enemy
     public GameObject attackParent;
     public GameObject[] attackPoint;
     public int eventState;
+    public GameObject effect;
     protected override void Start()
     {
         base.Start();
@@ -15,6 +16,13 @@ public class EnemyType3 : Enemy
             attackPoint[i].transform.Translate(Vector3.forward * 2);
         }
         StartCoroutine("FSM");
+    }
+
+    void OnEffect()
+    {
+        GameObject eff = Instantiate(effect);
+        eff.transform.position = gameObject.transform.position;
+        
     }
 
     // Update is called once per frame
@@ -60,6 +68,8 @@ public class EnemyType3 : Enemy
     IEnumerator Pattern_1()
     {
         eventState = 1;
+        OnEffect();
+        yield return new WaitForSeconds(3f);
         for (int j = 0; j < 6; j++)
         {
             for (int i = 0; i < 10; i++)
@@ -89,6 +99,8 @@ public class EnemyType3 : Enemy
     IEnumerator Pattern_2()
     {
         eventState = 2;
+        OnEffect();
+        yield return new WaitForSeconds(3f);
         for (int i = 0; i < 50; i++)
         {
             for (int j = 0; j < 12; j++)
@@ -103,6 +115,8 @@ public class EnemyType3 : Enemy
     IEnumerator Pattern_3()
     {
         eventState = 3;
+        OnEffect();
+        yield return new WaitForSeconds(3f);
         for (int k = 0; k < 3; k++)
         {
             eventState = 3;
