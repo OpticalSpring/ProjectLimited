@@ -10,6 +10,16 @@ public class EnemyType2 : Enemy
     float attackTimer;
     public GameObject attackPoint;
     bool attacked;
+    public GameObject effect;
+    public GameObject effectPosition;
+    bool at;
+    void OnEffect()
+    {
+        GameObject eff = Instantiate(effect);
+        eff.transform.position = effectPosition.transform.position;
+        eff.transform.rotation = effectPosition.transform.rotation;
+        eff.transform.parent = effectPosition.transform;
+    }
 
     // Update is called once per frame
     void Update()
@@ -24,13 +34,18 @@ public class EnemyType2 : Enemy
         DistanceCheck();
         if (realAttackTime > attackTime - 2)
         {
-
+            if (at == false)
+            {
+                at = true;
+                OnEffect();
+            }
             Turn(gameObject, nPos);
             realAttackTime -= Time.deltaTime;
 
         }
         else if (realAttackTime > 0)
         {
+            at = false;
             Attack();
             realAttackTime -= Time.deltaTime;
         }
@@ -63,7 +78,7 @@ public class EnemyType2 : Enemy
         temp.GetComponent<EnemyBall>().moveOn = false;
         temp.transform.position = attackPoint.transform.position;
         temp.transform.rotation = attackPoint.transform.rotation;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0f);
         if(temp != null)
         temp.GetComponent<EnemyBall>().moveOn = true;
     }

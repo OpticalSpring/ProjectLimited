@@ -22,7 +22,7 @@ public class EnemyType3 : Enemy
     {
         GameObject eff = Instantiate(effect);
         eff.transform.position = gameObject.transform.position;
-        
+        eff.transform.parent = gameObject.transform;
     }
 
     // Update is called once per frame

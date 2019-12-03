@@ -27,7 +27,8 @@ public class PlayerControl : MonoBehaviour
     public GameObject blinkEffect2;
     public GameObject reveralEffect1;
     public GameObject reveralEffect2;
-
+    public GameObject attackEffect;
+    public GameObject attackEffectPosition;
 
     public Material rimMat;
     // Start is called before the first frame update
@@ -309,8 +310,16 @@ public class PlayerControl : MonoBehaviour
         playerState.attackState = 2;
     }
 
+    void OnEffect()
+    {
+        GameObject eff = Instantiate(attackEffect);
+        eff.transform.position = attackEffectPosition.transform.position;
+        eff.transform.rotation = attackEffectPosition.transform.rotation;
+    }
+
     void Attack()
     {
+        OnEffect();
         ani.aniState = 1;
         playerState.attackDelay = playerState.attackDelayMax;
         playerState.autoMoveing = 0.3f;

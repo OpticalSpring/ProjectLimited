@@ -60,6 +60,36 @@ Transform:
   m_Father: {fileID: 7033374766275932489}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6373464791620354182
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3827663751046920542}
+  m_Layer: 9
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3827663751046920542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6373464791620354182}
+  m_LocalRotation: {x: -0.84826165, y: -0.05804629, z: 0.095105834, w: 0.5177235}
+  m_LocalPosition: {x: 0.17001343, y: 0.83, z: 2.44}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7033374766275932489}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: -60.145004, y: -153.58601, z: 156.694}
 --- !u!1 &7692196921912381075
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,6 +248,9 @@ MonoBehaviour:
     type: 3}
   reveralEffect2: {fileID: 959936609794885430, guid: 5b31cc333aa3e5d428c9aa28110783ea,
     type: 3}
+  attackEffect: {fileID: 2635016524339968697, guid: c12dc1f09437ef3478467c8bc19df20f,
+    type: 3}
+  attackEffectPosition: {fileID: 6373464791620354182}
   rimMat: {fileID: 2100000, guid: 23877b069cbfbdb4baa215d31375d972, type: 2}
 --- !u!114 &2027908229334227922
 MonoBehaviour:

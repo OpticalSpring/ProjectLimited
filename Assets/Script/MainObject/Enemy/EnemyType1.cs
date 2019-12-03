@@ -8,7 +8,16 @@ public class EnemyType1 : Enemy
     float realAttackTime;
     Vector3 nPos;
     float attackTimer;
-
+    public GameObject effect;
+    public GameObject effectPosition;
+    bool at;
+    void OnEffect()
+    {
+        GameObject eff = Instantiate(effect);
+        eff.transform.position = effectPosition.transform.position;
+        eff.transform.rotation = effectPosition.transform.rotation;
+        eff.transform.parent = effectPosition.transform;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -22,13 +31,18 @@ public class EnemyType1 : Enemy
         DistanceCheck();
         if (realAttackTime > attackTime-2)
         {
-            
+            if(at == false)
+            {
+                at = true;
+                OnEffect();
+            }
             Turn(gameObject, nPos);
             realAttackTime -= Time.deltaTime;
 
         }
         else if(realAttackTime > 0)
         {
+            at = false;
             Attack();
             realAttackTime -= Time.deltaTime;
         }
@@ -48,6 +62,7 @@ public class EnemyType1 : Enemy
 
     protected override void Attack()
     {
+        
         gameObject.transform.Translate(Vector3.forward * movementSpeed*3 * Time.deltaTime);
 
         if (attackTimer < 0)
