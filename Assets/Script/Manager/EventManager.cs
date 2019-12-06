@@ -7,7 +7,7 @@ public class EventManager : MonoBehaviour
 {
    
     public int eventNumber;
-
+    public PlayerState playerState;
     public GameObject mobGroup;
     public GameObject wallGroup;
     MessageManager messageManager;
@@ -25,13 +25,22 @@ public class EventManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F5))
         {
-            SceneManager.LoadSceneAsync(1);
+            GetComponent<FadeOutManager>().FadeOut(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GetComponent<FadeOutManager>().FadeOut(0);
         }
 
 
 
         SetEvent();
 
+
+        if(playerState.HP.x <= 0)
+        {
+            GetComponent<FadeOutManager>().FadeOut(0);
+        }
     }
 
     void SetEvent()

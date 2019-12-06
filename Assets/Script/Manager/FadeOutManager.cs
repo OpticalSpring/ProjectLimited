@@ -31,9 +31,10 @@ public class FadeOutManager : MonoBehaviour
 
     IEnumerator FadeOutSceneChange(int nextScene)
     {
-        for (int i = 0; i < 256; i++)
+        fadeOutPanel.color = new Color(0, 0, 0, 0);
+        for (int i = 0; i < 100; i++)
         {
-            fadeOutPanel.color = new Color(0, 0, 0,i / 255f);
+            fadeOutPanel.color = Vector4.Lerp(fadeOutPanel.color, new Color(0, 0, 0, 1.5f), Time.fixedDeltaTime);
             yield return new WaitForSecondsRealtime(0.01f);
         }
         SceneManager.LoadSceneAsync(nextScene);
@@ -41,10 +42,11 @@ public class FadeOutManager : MonoBehaviour
 
     IEnumerator FadeIn()
     {
-        for (int i = 0; i < 256; i++)
+        fadeOutPanel.color = new Color(0, 0, 0, 1.5f);
+        for (int i = 0; i < 100; i++)
         {
-            fadeOutPanel.color = new Color(0, 0, 0, (255 - i) / 255f);
-           yield return new WaitForSecondsRealtime(0.01f);
+            fadeOutPanel.color = Vector4.Lerp(fadeOutPanel.color, new Color(0, 0, 0, 0), Time.fixedDeltaTime);
+            yield return new WaitForSecondsRealtime(0.01f);
         }
     }
 }
