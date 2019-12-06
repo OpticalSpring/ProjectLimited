@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: "<color=#ff0000ff>\u96F6\u5F0F</color> SteellRain"
-  HP: {x: 1000, y: 1000}
+  HP: {x: 500, y: 500}
   movementSpeed: 3
   attackDistance: 10
   playerDistance: 0

@@ -3,29 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TitleManager : MonoBehaviour
+public class Credits : MonoBehaviour
 {
-
     // Start is called before the first frame update
     void Start()
     {
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
+        StartCoroutine(DelayTitle());
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        gameObject.transform.position += new Vector3(0, Time.fixedDeltaTime * 150, 0);
     }
 
-    public void GameStart()
+    IEnumerator DelayTitle()
     {
-        GetComponent<FadeOutManager>().FadeOut(1);
-    }
-
-    public void GameEnd()
-    {
-        Application.Quit();
+        yield return new WaitForSecondsRealtime(20);
+        SceneManager.LoadSceneAsync(0);
     }
 }

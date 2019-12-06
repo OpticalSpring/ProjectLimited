@@ -2012,6 +2012,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1660164867802347201, guid: edac0a3555ab88449a9df04ff6c4ef8a,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 870.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 1660164867547257358, guid: edac0a3555ab88449a9df04ff6c4ef8a,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 870.79
+      objectReference: {fileID: 0}
     - target: {fileID: 1660164867547257585, guid: edac0a3555ab88449a9df04ff6c4ef8a,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -2071,6 +2081,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1660164867802347200, guid: edac0a3555ab88449a9df04ff6c4ef8a,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: edac0a3555ab88449a9df04ff6c4ef8a, type: 3}

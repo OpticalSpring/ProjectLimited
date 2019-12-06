@@ -12,6 +12,7 @@ public class EventManager : MonoBehaviour
     public GameObject wallGroup;
     MessageManager messageManager;
     public GameObject messageObject;
+    bool on;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,10 +38,17 @@ public class EventManager : MonoBehaviour
         SetEvent();
 
 
-        if(playerState.HP.x <= 0)
+        if(playerState.HP.x <= 0 && on == false)
         {
-            GetComponent<FadeOutManager>().FadeOut(0);
+            on = true;
+            StartCoroutine(DelayDieRestart());
         }
+    }
+
+    IEnumerator DelayDieRestart()
+    {
+        yield return new WaitForSecondsRealtime(5);
+        GetComponent<FadeOutManager>().FadeOut(1);
     }
 
     void SetEvent()
@@ -91,7 +99,7 @@ public class EventManager : MonoBehaviour
                 StartCoroutine("Event_9");
                 break;
             case 10:
-                if (mobGroup.transform.GetChild(5).childCount == 0 && mobGroup.transform.GetChild(6).childCount == 0)
+                if (mobGroup.transform.GetChild(5).childCount == 0 && mobGroup.transform.GetChild(6).childCount == 0 && mobGroup.transform.GetChild(7).childCount == 0 && mobGroup.transform.GetChild(8).childCount == 0)
                 {
                     eventNumber++;
                 }
@@ -111,6 +119,10 @@ public class EventManager : MonoBehaviour
                 StartCoroutine("Event_15");
                 break;
             case 16:
+                if (mobGroup.transform.GetChild(9).childCount == 0)
+                {
+                    eventNumber++;
+                }
                 break;
             case 17:
                 break;
@@ -128,7 +140,7 @@ public class EventManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(3);
         messageManager.TextSetUp("에버 첫 임무를 환영합니다.");
         yield return new WaitForSecondsRealtime(3);
-        messageManager.TextSetUp("본대는 도심 방위만으로 벅차 당신의 임무가 중요합니다.");
+        messageManager.TextSetUp("현재 도심 방어에 대부분의 전력이 투입되어있어 따로 서포트는 없습니다.");
         yield return new WaitForSecondsRealtime(3);
         messageManager.TextSetUp("먼저 간단히 전술교범을 설명해드릴게요.");
         yield return new WaitForSecondsRealtime(3);
@@ -168,15 +180,15 @@ public class EventManager : MonoBehaviour
     {
         eventNumber++;
         yield return new WaitForSecondsRealtime(3);
-        messageManager.TextSetUp("이제 다음 구역으로 이동합니다.");
+        messageManager.TextSetUp("이제 다음 구역으로 이동하세요.");
         for (int i = 0; i < wallGroup.transform.GetChild(0).childCount; i++)
         {
             wallGroup.transform.GetChild(0).GetChild(i).GetChild(0).gameObject.GetComponent<DestroyMaterial>().on = false;
         }
         yield return new WaitForSecondsRealtime(1);
         wallGroup.transform.GetChild(0).gameObject.SetActive(false);
+        messageManager.TextSetUp("벽은 특정 조건을 충족하면 통과가 가능합니다 .");
         yield return new WaitForSecondsRealtime(3);
-        messageManager.TextSetUp("도시 외곽을 정리합니다.");
         yield return new WaitForSecondsRealtime(0);
     }
 
@@ -184,7 +196,7 @@ public class EventManager : MonoBehaviour
     {
         eventNumber++;
         yield return new WaitForSecondsRealtime(3);
-        messageManager.TextSetUp("습격입니다.");
+        messageManager.TextSetUp("이번엔 더 많은 적입니다.");
         mobGroup.transform.GetChild(2).gameObject.SetActive(true);
         yield return new WaitForSecondsRealtime(0);
     }
@@ -193,7 +205,7 @@ public class EventManager : MonoBehaviour
     {
         eventNumber++;
         yield return new WaitForSecondsRealtime(3);
-        messageManager.TextSetUp("전방 적 식별");
+        messageManager.TextSetUp("전방 적 식별!");
         mobGroup.transform.GetChild(3).gameObject.SetActive(true);
         yield return new WaitForSecondsRealtime(0);
     }
@@ -202,7 +214,7 @@ public class EventManager : MonoBehaviour
     {
         eventNumber++;
         yield return new WaitForSecondsRealtime(3);
-        messageManager.TextSetUp("조심하세요.");
+        messageManager.TextSetUp("포위되지 않게 주의하세요.");
         mobGroup.transform.GetChild(4).gameObject.SetActive(true);
         yield return new WaitForSecondsRealtime(0);
     }
@@ -211,7 +223,7 @@ public class EventManager : MonoBehaviour
     {
         eventNumber++;
         yield return new WaitForSecondsRealtime(3);
-        messageManager.TextSetUp("외곽도로쪽으로 TimeBlink로 건너가십시오.");
+        messageManager.TextSetUp("외곽도로 방향으로 TimeBlink로 건너가세오.");
         for (int i = 0; i < wallGroup.transform.GetChild(1).childCount; i++)
         {
             wallGroup.transform.GetChild(1).GetChild(i).GetChild(0).gameObject.GetComponent<DestroyMaterial>().on = false;
@@ -228,9 +240,13 @@ public class EventManager : MonoBehaviour
         messageManager.TextSetUp("근방 다수의 적 식별");
         mobGroup.transform.GetChild(5).gameObject.SetActive(true);
         yield return new WaitForSecondsRealtime(3);
-        messageManager.TextSetUp("적 본대 곧 도착합니다.");
-        yield return new WaitForSecondsRealtime(6);
+        messageManager.TextSetUp("적 본대 추가로 계속 도착합니다.");
+        yield return new WaitForSecondsRealtime(25);
         mobGroup.transform.GetChild(6).gameObject.SetActive(true);
+        yield return new WaitForSecondsRealtime(25);
+        mobGroup.transform.GetChild(7).gameObject.SetActive(true);
+        yield return new WaitForSecondsRealtime(25);
+        mobGroup.transform.GetChild(8).gameObject.SetActive(true);
     }
     
 
@@ -254,11 +270,11 @@ public class EventManager : MonoBehaviour
         eventNumber++;
         yield return new WaitForSecondsRealtime(3);
         messageManager.TextSetUp("Type.Zero 零式 SteelRain입니다.");
-        mobGroup.transform.GetChild(7).gameObject.SetActive(true);
+        mobGroup.transform.GetChild(9).gameObject.SetActive(true);
         yield return new WaitForSecondsRealtime(3);
-        messageManager.TextSetUp("위협레벨 최상위등급입니다.");
+        messageManager.TextSetUp("위협레벨 최상위등급");
         yield return new WaitForSecondsRealtime(3);
-        messageManager.TextSetUp("도심 방위를 위해 꼭 섬멸하십시오.");
+        messageManager.TextSetUp("가진 모든 능력을 전부 사용하여 섬멸하세요!");
         yield return new WaitForSecondsRealtime(0);
 
     }
