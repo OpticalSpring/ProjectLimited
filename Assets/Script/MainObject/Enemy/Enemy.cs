@@ -11,11 +11,13 @@ public class Enemy : MonoBehaviour
     public float playerDistance;
     public GameObject player;
     public float hitTime;
+    protected EnemyAni ani;
 
     protected virtual void Start()
     {
         gameObject.name = name;
         player = GameObject.FindGameObjectWithTag("Player");
+        ani = GetComponent<EnemyAni>();
     }
 
     public void Hit()
@@ -34,12 +36,13 @@ public class Enemy : MonoBehaviour
     }
     protected void DistanceCheck()
     {
+        ani.aniState = 0;
         playerDistance = Vector3.Distance(gameObject.transform.position, player.transform.position);
     }
 
     protected void Chase()
     {
-        
+        ani.aniState = 1;
         gameObject.transform.Translate(Vector3.forward * movementSpeed * Time.deltaTime);
     }
 
@@ -57,6 +60,7 @@ public class Enemy : MonoBehaviour
     {
         if (hitTime > 0)
         {
+            ani.aniState = 10;
             hitTime -= Time.fixedDeltaTime;
         }
     }

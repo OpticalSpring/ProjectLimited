@@ -1,30 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class TitleManager : MonoBehaviour
+public class EnemyAni : MonoBehaviour
 {
-
+    Animator ani;
+    public int aniState;
     // Start is called before the first frame update
     void Start()
     {
-        
+        ani = transform.GetChild(0).gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        SetAniState();
     }
 
-    public void GameStart()
+    void SetAniState()
     {
-        GetComponent<FadeOutManager>().FadeOut(1);
+        ani.SetInteger("AniState", aniState);
     }
-
-    public void GameEnd()
-    {
-        Application.Quit();
-    }
+    
 }

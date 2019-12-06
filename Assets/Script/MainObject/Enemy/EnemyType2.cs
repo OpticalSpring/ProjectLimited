@@ -69,6 +69,7 @@ public class EnemyType2 : Enemy
         if (attacked == false) {
             StartCoroutine("DelayShot");
             attacked = true;
+            ani.aniState = 3;
         }
     }
 
@@ -78,7 +79,7 @@ public class EnemyType2 : Enemy
         temp.GetComponent<EnemyBall>().moveOn = false;
         temp.transform.position = attackPoint.transform.position;
         temp.transform.rotation = attackPoint.transform.rotation;
-        yield return new WaitForSeconds(0f);
+        yield return new WaitForSeconds(0.5f);
         if(temp != null)
         temp.GetComponent<EnemyBall>().moveOn = true;
     }

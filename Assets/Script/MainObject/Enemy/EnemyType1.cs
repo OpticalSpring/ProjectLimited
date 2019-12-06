@@ -62,7 +62,7 @@ public class EnemyType1 : Enemy
 
     protected override void Attack()
     {
-        
+        ani.aniState = 2;
         gameObject.transform.Translate(Vector3.forward * movementSpeed*3 * Time.deltaTime);
 
         if (attackTimer < 0)
