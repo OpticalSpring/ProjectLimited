@@ -11,6 +11,7 @@ public class TitleManager : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(3, 0);
     }
 
     // Update is called once per frame
@@ -21,11 +22,13 @@ public class TitleManager : MonoBehaviour
 
     public void GameStart()
     {
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundStop(3, 0);
         GetComponent<FadeOutManager>().FadeOut(1);
     }
 
     public void GameEnd()
     {
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundStop(3, 0);
         Application.Quit();
     }
 }

@@ -38,6 +38,7 @@ public class EnemyType2 : Enemy
             {
                 at = true;
                 OnEffect();
+                GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay3D(4, 1, gameObject.transform.position);
             }
             Turn(gameObject, nPos);
             realAttackTime -= Time.deltaTime;

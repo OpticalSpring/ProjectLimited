@@ -190,6 +190,7 @@ public class PlayerControl : MonoBehaviour
 
     IEnumerator Reveral()
     {
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(2, 1);
         GameObject effect = Instantiate(reveralEffect1);
         effect.transform.position = gameObject.transform.position;
         effect.transform.rotation = gameObject.transform.rotation;
@@ -234,6 +235,7 @@ public class PlayerControl : MonoBehaviour
 
     IEnumerator Lapse()
     {
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(2, 2);
         playerState.lapseDelay = playerState.lapseDelayMax;
         playerState.playerFSM = PlayerState.PlayerFSM.Lapse;
         Time.timeScale = 0.2f;
@@ -319,6 +321,7 @@ public class PlayerControl : MonoBehaviour
 
     void Attack()
     {
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().RandomPlay(1, 0, 5);
         OnEffect();
         ani.aniState = 1;
         playerState.attackDelay = playerState.attackDelayMax;
@@ -441,6 +444,7 @@ public class PlayerControl : MonoBehaviour
 
     void Blink()
     {
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(2, 3);
         GameObject effect = Instantiate(blinkEffect1);
         effect.transform.position = gameObject.transform.position;
         effect.transform.rotation = gameObject.transform.rotation;
@@ -558,6 +562,7 @@ public class PlayerControl : MonoBehaviour
 
     public void Hit()
     {
+      GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(2, 0);
         if (playerState.playerFSM == PlayerState.PlayerFSM.Reveral)
         {
             return;

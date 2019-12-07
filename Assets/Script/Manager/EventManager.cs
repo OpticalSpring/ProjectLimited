@@ -19,6 +19,7 @@ public class EventManager : MonoBehaviour
         Cursor.visible = false;                    
         Cursor.lockState = CursorLockMode.Locked;
         messageManager = messageObject.GetComponent<MessageManager>();
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(3, 1);
     }
 
     // Update is called once per frame
@@ -26,10 +27,14 @@ public class EventManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F5))
         {
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundStop(3, 1);
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundStop(3, 2);
             GetComponent<FadeOutManager>().FadeOut(1);
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundStop(3, 1);
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundStop(3, 2);
             GetComponent<FadeOutManager>().FadeOut(0);
         }
 
@@ -41,6 +46,7 @@ public class EventManager : MonoBehaviour
         if(playerState.HP.x <= 0 && on == false)
         {
             on = true;
+            
             StartCoroutine(DelayDieRestart());
         }
     }
@@ -48,6 +54,8 @@ public class EventManager : MonoBehaviour
     IEnumerator DelayDieRestart()
     {
         yield return new WaitForSecondsRealtime(5);
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundStop(3, 1);
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundStop(3, 2);
         GetComponent<FadeOutManager>().FadeOut(1);
     }
 
@@ -269,6 +277,8 @@ public class EventManager : MonoBehaviour
     {
         eventNumber++;
         yield return new WaitForSecondsRealtime(3);
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundStop(3, 1);
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(3, 2);
         messageManager.TextSetUp("Type.Zero 零式 SteelRain입니다.");
         mobGroup.transform.GetChild(9).gameObject.SetActive(true);
         yield return new WaitForSecondsRealtime(3);

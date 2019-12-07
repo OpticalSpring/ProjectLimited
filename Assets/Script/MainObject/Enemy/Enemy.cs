@@ -69,6 +69,7 @@ public class Enemy : MonoBehaviour
     {
         if(HP.x <= 0)
         {
+            GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay3D(4, 2, gameObject.transform.position);
             Destroy(gameObject.transform.GetChild(0).gameObject, 2);
             gameObject.transform.GetChild(0).GetChild(1).gameObject.GetComponent<DestroyMaterial>().enabled = true;
             gameObject.transform.GetChild(0).parent = null;
