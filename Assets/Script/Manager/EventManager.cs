@@ -191,7 +191,7 @@ public class EventManager : MonoBehaviour
         messageManager.TextSetUp("이제 다음 구역으로 이동하세요.");
         for (int i = 0; i < wallGroup.transform.GetChild(0).childCount; i++)
         {
-            wallGroup.transform.GetChild(0).GetChild(i).GetChild(0).gameObject.GetComponent<DestroyMaterial>().on = false;
+            wallGroup.transform.GetChild(0).GetChild(i).gameObject.GetComponent<BarricadeControl>().on = false;
         }
         yield return new WaitForSecondsRealtime(1);
         wallGroup.transform.GetChild(0).gameObject.SetActive(false);
@@ -234,7 +234,7 @@ public class EventManager : MonoBehaviour
         messageManager.TextSetUp("외곽도로 방향으로 TimeBlink로 건너가세오.");
         for (int i = 0; i < wallGroup.transform.GetChild(1).childCount; i++)
         {
-            wallGroup.transform.GetChild(1).GetChild(i).GetChild(0).gameObject.GetComponent<DestroyMaterial>().on = false;
+            wallGroup.transform.GetChild(1).GetChild(i).gameObject.GetComponent<BarricadeControl>().on = false;
         }
         yield return new WaitForSecondsRealtime(1);
         wallGroup.transform.GetChild(1).gameObject.SetActive(false);
@@ -265,9 +265,9 @@ public class EventManager : MonoBehaviour
         messageManager.TextSetUp("대로변 게이트가 열렸습니다. 도심방향으로 전진하세요.");
         for (int i = 0; i < wallGroup.transform.GetChild(3).childCount; i++)
         {
-            wallGroup.transform.GetChild(3).GetChild(i).GetChild(0).gameObject.GetComponent<DestroyMaterial>().on = false;
+            wallGroup.transform.GetChild(3).GetChild(i).gameObject.GetComponent<BarricadeControl>().on = false;
         }
-        yield return new WaitForSecondsRealtime(1);
+            yield return new WaitForSecondsRealtime(1);
         wallGroup.transform.GetChild(3).gameObject.SetActive(false);
         yield return new WaitForSecondsRealtime(0);
         

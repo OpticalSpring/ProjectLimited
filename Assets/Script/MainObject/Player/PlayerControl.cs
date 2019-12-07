@@ -31,6 +31,7 @@ public class PlayerControl : MonoBehaviour
     public GameObject attackEffectPosition;
 
     public Material rimMat;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -67,7 +68,7 @@ public class PlayerControl : MonoBehaviour
             {
                 playerState.blinkStack++;
                 playerState.blinkDelay = playerState.blinkDelayMax;
-
+                GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(2, 4);
             }
         }
         else
@@ -81,6 +82,7 @@ public class PlayerControl : MonoBehaviour
             if (playerState.reveralDelay < 0)
             {
                 playerState.reveralDelay = 0;
+                GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(2, 4);
             }
         }
         if (playerState.lapseDelay > 0)
@@ -89,6 +91,7 @@ public class PlayerControl : MonoBehaviour
             if (playerState.lapseDelay < 0)
             {
                 playerState.lapseDelay = 0;
+                GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(2, 4);
             }
         }
         if (playerState.attackDelay > 0)

@@ -17,7 +17,7 @@ public class WallDown : MonoBehaviour
             for (int i = 0; i < wall.transform.childCount; i++)
             {
                 wall.SetActive(true);
-                wall.transform.GetChild(i).GetChild(0).gameObject.GetComponent<DestroyMaterial>().on = true;
+                wall.transform.GetChild(i).gameObject.GetComponent<BarricadeControl>().on = true;
             }
         }
     }
