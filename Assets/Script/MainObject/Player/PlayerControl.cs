@@ -477,6 +477,7 @@ public class PlayerControl : MonoBehaviour
         }
         Destroy(effect, 2);
         StartCoroutine("BlinkRollBackDelay");
+        Move();
     }
 
     IEnumerator BlinkRollBackDelay()
