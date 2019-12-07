@@ -28,6 +28,7 @@ public class EnemyType3 : Enemy
     // Update is called once per frame
     void Update()
     {
+        DeadCheck();
         switch (eventState)
         {
             case 0:
