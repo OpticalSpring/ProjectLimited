@@ -20,15 +20,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpTex:
-        m_Texture: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 2800000, guid: eac164dfacd338a4a8e3e40351c3acaa, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmitTex:
-        m_Texture: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 2800000, guid: eac164dfacd338a4a8e3e40351c3acaa, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 2800000, guid: eac164dfacd338a4a8e3e40351c3acaa, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTex:
@@ -37,9 +37,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _Cutoff: 0.5
-    - _Hide: 1
+    - _Hide: 0.67
     - _Metallic: 0
     - _Smoothness: 0
     m_Colors:
-    - _AlphaColor: {r: 1, g: 1, b: 1, a: 1}
+    - _AlphaColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
