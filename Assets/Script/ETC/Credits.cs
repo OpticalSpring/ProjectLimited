@@ -8,6 +8,7 @@ public class Credits : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(3, 3);
         StartCoroutine(DelayTitle());
     }
 
@@ -19,7 +20,9 @@ public class Credits : MonoBehaviour
 
     IEnumerator DelayTitle()
     {
-        yield return new WaitForSecondsRealtime(20);
+        yield return new WaitForSecondsRealtime(18);
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundStop(3, 3);
+        yield return new WaitForSecondsRealtime(2);
         SceneManager.LoadSceneAsync(0);
     }
 }

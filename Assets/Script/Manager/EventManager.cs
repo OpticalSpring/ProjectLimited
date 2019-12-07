@@ -129,7 +129,7 @@ public class EventManager : MonoBehaviour
             case 16:
                 if (mobGroup.transform.GetChild(9).childCount == 0)
                 {
-                    eventNumber++;
+                    StartCoroutine(Event_16());
                 }
                 break;
             case 17:
@@ -148,7 +148,7 @@ public class EventManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(3);
         messageManager.TextSetUp("에버 첫 임무를 환영합니다.");
         yield return new WaitForSecondsRealtime(3);
-        messageManager.TextSetUp("현재 도심 방어에 대부분의 전력이 투입되어있어 따로 서포트는 없습니다.");
+        messageManager.TextSetUp("현재 도심 방어에 전력 대부분이 투입되어있어 서포트는 불가능합니다.");
         yield return new WaitForSecondsRealtime(3);
         messageManager.TextSetUp("먼저 간단히 전술교범을 설명해드릴게요.");
         yield return new WaitForSecondsRealtime(3);
@@ -195,7 +195,7 @@ public class EventManager : MonoBehaviour
         }
         yield return new WaitForSecondsRealtime(1);
         wallGroup.transform.GetChild(0).gameObject.SetActive(false);
-        messageManager.TextSetUp("벽은 특정 조건을 충족하면 통과가 가능합니다 .");
+        messageManager.TextSetUp("바리케이드는 특정 조건을 충족하면 통과가 가능합니다 .");
         yield return new WaitForSecondsRealtime(3);
         yield return new WaitForSecondsRealtime(0);
     }
@@ -262,7 +262,7 @@ public class EventManager : MonoBehaviour
     {
         eventNumber++;
         yield return new WaitForSecondsRealtime(3);
-        messageManager.TextSetUp("대로변 게이트가 열렸습니다. 도심방향으로 전진하세요.");
+        messageManager.TextSetUp("대로변 게이트가 열렸습니다. 도심 방향으로 전진하세요.");
         for (int i = 0; i < wallGroup.transform.GetChild(3).childCount; i++)
         {
             wallGroup.transform.GetChild(3).GetChild(i).gameObject.GetComponent<BarricadeControl>().on = false;
@@ -277,15 +277,30 @@ public class EventManager : MonoBehaviour
     {
         eventNumber++;
         yield return new WaitForSecondsRealtime(3);
+        messageManager.TextSetUp("이 반응은...!!!");
+        yield return new WaitForSecondsRealtime(3);
         GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundStop(3, 1);
         GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(3, 2);
         messageManager.TextSetUp("Type.Zero 零式 SteelRain입니다.");
         mobGroup.transform.GetChild(9).gameObject.SetActive(true);
         yield return new WaitForSecondsRealtime(3);
-        messageManager.TextSetUp("위협레벨 최상위등급");
+        messageManager.TextSetUp("위협레벨 최상위등급!");
         yield return new WaitForSecondsRealtime(3);
         messageManager.TextSetUp("가진 모든 능력을 전부 사용하여 섬멸하세요!");
         yield return new WaitForSecondsRealtime(0);
 
+    }
+
+    IEnumerator Event_16()
+    {
+        eventNumber++;
+        yield return new WaitForSecondsRealtime(3);
+        messageManager.TextSetUp("에버, 당신의 공으로 이 도시를 지켜낼 수 있었습니다.");
+        yield return new WaitForSecondsRealtime(3);
+        messageManager.TextSetUp("하지만 이 전쟁은 이제 시작일 뿐입니다.");
+        yield return new WaitForSecondsRealtime(3);
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundStop(3, 1);
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundStop(3, 2);
+        GetComponent<FadeOutManager>().FadeOut(2);
     }
 }
