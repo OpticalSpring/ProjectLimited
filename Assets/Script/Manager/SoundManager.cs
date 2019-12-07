@@ -39,7 +39,11 @@ public class SoundManager : MonoBehaviour
         SoundPlay(i, j);
     }
 
-
+    public void RandomPlayNew(int i, int x, int y)
+    {
+        int j = Random.Range(x, y + 1);
+        SoundPlay3D(i, j,Vector3.zero);
+    }
 
 
     IEnumerator I1(int i, int j)

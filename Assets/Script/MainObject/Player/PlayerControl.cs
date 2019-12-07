@@ -324,7 +324,7 @@ public class PlayerControl : MonoBehaviour
 
     void Attack()
     {
-        GameObject.Find("SoundManager").GetComponent<SoundManager>().RandomPlay(1, 0, 5);
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().RandomPlayNew(1, 0, 5);
         OnEffect();
         ani.aniState = 1;
         playerState.attackDelay = playerState.attackDelayMax;

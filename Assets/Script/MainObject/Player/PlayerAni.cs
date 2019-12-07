@@ -24,6 +24,10 @@ public class PlayerAni : MonoBehaviour
     void SetAniState()
     {
         realMovement = Mathf.Lerp(realMovement, movement, Time.fixedDeltaTime * 5);
+        if(realMovement < 0.01f)
+        {
+            realMovement = 0;
+        }
         ani.SetFloat("Movement", realMovement);
         ani.SetInteger("AniState", aniState);
         ani.SetInteger("AttackState", attackState);
