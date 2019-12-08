@@ -191,6 +191,9 @@ MonoBehaviour:
   - {fileID: 5491308625366714611}
   eventState: 0
   effect: {fileID: 6104836766867663219, guid: 03156c5f91896c444bf8881937aee9dc, type: 3}
+  mob:
+  - {fileID: 77883426747313077, guid: 295e13992fff13b4782741cf075c7a1a, type: 3}
+  - {fileID: 8075229661705091361, guid: e65ea2d0a1124b34fbcefe142f61ccc0, type: 3}
 --- !u!65 &2983350449063376026
 BoxCollider:
   m_ObjectHideFlags: 0

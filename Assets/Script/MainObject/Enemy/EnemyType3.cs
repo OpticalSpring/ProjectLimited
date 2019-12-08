@@ -8,6 +8,7 @@ public class EnemyType3 : Enemy
     public GameObject[] attackPoint;
     public int eventState;
     public GameObject effect;
+    public GameObject[] mob;
     protected override void Start()
     {
         base.Start();
@@ -59,16 +60,29 @@ public class EnemyType3 : Enemy
         while (true)
         {
             StartCoroutine("Pattern_1");
+            MobSpawn();
             yield return new WaitForSeconds(20f);
             StartCoroutine("Pattern_2");
+            MobSpawn();
             yield return new WaitForSeconds(20f);
             StartCoroutine("Pattern_3");
+            MobSpawn();
             yield return new WaitForSeconds(20f);
         }
     }
 
+    void MobSpawn()
+    {
+        GameObject temp1 = Instantiate(mob[0]);
+        temp1.transform.position = gameObject.transform.position;
+
+        GameObject temp2 = Instantiate(mob[1]);
+        temp2.transform.position = gameObject.transform.position;
+    }
+
     IEnumerator Pattern_1()
     {
+        
         eventState = 1;
         OnEffect();
         yield return new WaitForSeconds(3f);
@@ -138,6 +152,7 @@ public class EnemyType3 : Enemy
         }
         eventState = 0;
     }
+    
 
     void Attack(int i)
     {
