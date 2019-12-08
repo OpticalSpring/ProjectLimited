@@ -38,6 +38,11 @@ public class EventManager : MonoBehaviour
             GetComponent<FadeOutManager>().FadeOut(0);
         }
 
+         if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        {
+            playerState.HP.x = 10000;
+        }
+
 
 
         SetEvent();
