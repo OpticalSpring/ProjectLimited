@@ -22,6 +22,7 @@ public class EnemyType3 : Enemy
     {
         GameObject eff = Instantiate(effect);
         eff.transform.position = gameObject.transform.position;
+        eff.transform.rotation = gameObject.transform.rotation;
         eff.transform.parent = gameObject.transform;
     }
 

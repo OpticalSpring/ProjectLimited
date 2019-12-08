@@ -38,6 +38,6 @@ public class PlayerAni : MonoBehaviour
         copy.SetFloat("Movement", realMovement);
         copy.SetInteger("AniState", aniState);
         copy.SetInteger("AttackState", attackState);
-        copy.speed = 0;
+        copy.speed = 0.1f;
     }
 }

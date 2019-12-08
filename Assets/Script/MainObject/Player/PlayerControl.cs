@@ -27,8 +27,9 @@ public class PlayerControl : MonoBehaviour
     public GameObject blinkEffect2;
     public GameObject reveralEffect1;
     public GameObject reveralEffect2;
-    public GameObject attackEffect;
-    public GameObject attackEffectPosition;
+    public GameObject attackEffect1;
+    public GameObject attackEffect2;
+    // public GameObject attackEffectPosition;
 
     public Material rimMat;
     
@@ -169,6 +170,14 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
+    public void NewPositionSave()
+    {
+        for (int i = 0; i < 30; i++)
+        {
+            oldPos[i] = gameObject.transform.position;
+        }
+    }
+
     IEnumerator PositionSave()
     {
         for (int i = 0; i < 30; i++)
@@ -304,6 +313,7 @@ public class PlayerControl : MonoBehaviour
     void LeftAttack()
     {
         Attack();
+        OnEffect1();
         ani.attackState = 1;
         playerState.attackState = 1;
     }
@@ -311,21 +321,30 @@ public class PlayerControl : MonoBehaviour
     void RightAttack()
     {
         Attack();
+        OnEffect2();
         ani.attackState = 2;
         playerState.attackState = 2;
     }
 
-    void OnEffect()
+    void OnEffect1()
     {
-        GameObject eff = Instantiate(attackEffect);
-        eff.transform.position = attackEffectPosition.transform.position;
-        eff.transform.rotation = attackEffectPosition.transform.rotation;
+        GameObject eff = Instantiate(attackEffect1);
+        eff.transform.position = gameObject.transform.position;
+        eff.transform.rotation = gameObject.transform.GetChild(0).rotation;
+        Destroy(eff, 2);
+    }
+
+    void OnEffect2()
+    {
+        GameObject eff = Instantiate(attackEffect2);
+        eff.transform.position = gameObject.transform.position;
+        eff.transform.rotation = gameObject.transform.GetChild(0).rotation;
+        Destroy(eff, 2);
     }
 
     void Attack()
     {
         GameObject.Find("SoundManager").GetComponent<SoundManager>().RandomPlayNew(1, 0, 5);
-        OnEffect();
         ani.aniState = 1;
         playerState.attackDelay = playerState.attackDelayMax;
         playerState.autoMoveing = 0.3f;

@@ -276,11 +276,11 @@ public class EventManager : MonoBehaviour
     IEnumerator Event_15()
     {
         eventNumber++;
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundStop(3, 1);
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(3, 2);
         yield return new WaitForSecondsRealtime(3);
         messageManager.TextSetUp("이 반응은...!!!");
         yield return new WaitForSecondsRealtime(3);
-        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundStop(3, 1);
-        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(3, 2);
         messageManager.TextSetUp("Type.Zero 零式 SteelRain입니다.");
         mobGroup.transform.GetChild(9).gameObject.SetActive(true);
         yield return new WaitForSecondsRealtime(3);

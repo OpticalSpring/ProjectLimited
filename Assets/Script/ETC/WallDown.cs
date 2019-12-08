@@ -14,6 +14,7 @@ public class WallDown : MonoBehaviour
         {
             eventManager.GetComponent<EventManager>().eventNumber++;
             set = true;
+            GameObject.Find("Player").GetComponent<PlayerControl>().NewPositionSave();
             for (int i = 0; i < wall.transform.childCount; i++)
             {
                 wall.SetActive(true);

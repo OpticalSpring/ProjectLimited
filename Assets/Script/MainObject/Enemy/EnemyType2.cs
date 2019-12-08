@@ -34,13 +34,13 @@ public class EnemyType2 : Enemy
         DistanceCheck();
         if (realAttackTime > attackTime - 2)
         {
+            Turn(gameObject, nPos);
             if (at == false)
             {
                 at = true;
                 OnEffect();
                 GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay3D(4, 1, gameObject.transform.position);
             }
-            Turn(gameObject, nPos);
             realAttackTime -= Time.deltaTime;
 
         }

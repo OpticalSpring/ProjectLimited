@@ -18,6 +18,9 @@ public class EnemyType1 : Enemy
         eff.transform.rotation = effectPosition.transform.rotation;
         eff.transform.parent = effectPosition.transform;
     }
+    
+
+
     // Update is called once per frame
     void Update()
     {
@@ -31,13 +34,13 @@ public class EnemyType1 : Enemy
         DistanceCheck();
         if (realAttackTime > attackTime-2)
         {
+            Turn(gameObject, nPos);
             if(at == false)
             {
                 at = true;
                 OnEffect();
                 GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay3D(4, 0, gameObject.transform.position);
             }
-            Turn(gameObject, nPos);
             realAttackTime -= Time.deltaTime;
 
         }

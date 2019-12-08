@@ -260,9 +260,10 @@ MonoBehaviour:
     type: 3}
   reveralEffect2: {fileID: 959936609794885430, guid: 5b31cc333aa3e5d428c9aa28110783ea,
     type: 3}
-  attackEffect: {fileID: 2635016524339968697, guid: c12dc1f09437ef3478467c8bc19df20f,
+  attackEffect1: {fileID: 8401205856345329324, guid: f98d08577c276024ca58ce26f9fd5234,
     type: 3}
-  attackEffectPosition: {fileID: 6373464791620354182}
+  attackEffect2: {fileID: 7309331722596583866, guid: 22d7ea90d84041b42a9b623edc207f78,
+    type: 3}
   rimMat: {fileID: 2100000, guid: 23877b069cbfbdb4baa215d31375d972, type: 2}
 --- !u!114 &2027908229334227922
 MonoBehaviour:
@@ -343,14 +344,14 @@ PrefabInstance:
       propertyPath: m_UpdateMode
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 13700000, guid: b5d0afc5d08f3c2499665405d9089f91, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 0a10c38e19c41b647ae433ec3a49a591, type: 2}
     - target: {fileID: 13700002, guid: b5d0afc5d08f3c2499665405d9089f91, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1ae7596c69adeba48a064afdf1432817, type: 2}
+    - target: {fileID: 13700000, guid: b5d0afc5d08f3c2499665405d9089f91, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0a10c38e19c41b647ae433ec3a49a591, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b5d0afc5d08f3c2499665405d9089f91, type: 3}
 --- !u!1 &7033374766276095273 stripped
