@@ -74,6 +74,7 @@ public class EnemyType3 : Enemy
         yield return new WaitForSeconds(3f);
         for (int j = 0; j < 6; j++)
         {
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(4, 3);
             for (int i = 0; i < 10; i++)
             {
                 attackParent.transform.localEulerAngles = new Vector3(0, 0, 0);
@@ -103,6 +104,7 @@ public class EnemyType3 : Enemy
         eventState = 2;
         OnEffect();
         yield return new WaitForSeconds(3f);
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(4, 3);
         for (int i = 0; i < 50; i++)
         {
             for (int j = 0; j < 12; j++)
@@ -121,6 +123,7 @@ public class EnemyType3 : Enemy
         yield return new WaitForSeconds(3f);
         for (int k = 0; k < 3; k++)
         {
+        GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(4, 3);
             eventState = 3;
             for (int i = 0; i < 30; i++)
             {
