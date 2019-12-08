@@ -278,7 +278,7 @@ public class EventManager : MonoBehaviour
         eventNumber++;
         GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundStop(3, 1);
         GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(3, 2);
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(5);
         messageManager.TextSetUp("이 반응은...!!!");
         yield return new WaitForSecondsRealtime(3);
         messageManager.TextSetUp("Type.Zero 零式 SteelRain입니다.");
@@ -299,6 +299,8 @@ public class EventManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(3);
         messageManager.TextSetUp("하지만 이 전쟁은 이제 시작일 뿐입니다.");
         yield return new WaitForSecondsRealtime(3);
+        messageManager.TextSetUp("이제 조금은 쉬셔도됩니다.");
+        yield return new WaitForSecondsRealtime(6);
         GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundStop(3, 1);
         GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundStop(3, 2);
         GetComponent<FadeOutManager>().FadeOut(2);

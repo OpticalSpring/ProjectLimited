@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: "<color=#ff0000ff>20\u5F0F</color> Bullpup"
   HP: {x: 10, y: 10}
-  movementSpeed: 3
+  movementSpeed: 5
   attackDistance: 12
   playerDistance: 0
   player: {fileID: 0}
