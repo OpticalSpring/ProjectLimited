@@ -9,6 +9,7 @@ public class EnemyType3 : Enemy
     public int eventState;
     public GameObject effect;
     public GameObject[] mob;
+    public int phase;
     protected override void Start()
     {
         base.Start();
@@ -73,11 +74,16 @@ public class EnemyType3 : Enemy
 
     void MobSpawn()
     {
+        phase++;
+        for (int i = 0; i < phase; i++)
+        {
         GameObject temp1 = Instantiate(mob[0]);
-        temp1.transform.position = gameObject.transform.position;
+        temp1.transform.position = gameObject.transform.position + new Vector3(Random.Range(-10, 10),0, Random.Range(-10, 10));
 
         GameObject temp2 = Instantiate(mob[1]);
-        temp2.transform.position = gameObject.transform.position;
+        temp2.transform.position = gameObject.transform.position + new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
+
+        }
     }
 
     IEnumerator Pattern_1()
