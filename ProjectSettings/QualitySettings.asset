@@ -184,9 +184,10 @@ QualitySettings:
     asyncUploadBufferSize: 16
     asyncUploadPersistentBuffer: 1
     resolutionScalingFixedDPIFactor: 1
-    excludedTargetPlatforms: []
+    excludedTargetPlatforms:
+    - Standalone
   - serializedVersion: 2
-    name: Ultra
+    name: TEAM.LIMITED
     pixelLightCount: 4
     shadows: 2
     shadowResolution: 2
