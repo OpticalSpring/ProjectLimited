@@ -71,7 +71,7 @@ public class EnemyType1 : Enemy
 
         if (attackTimer < 0)
         {
-            attackTimer = 0.3f;
+            attackTimer = 0.1f;
             Collider[] colliderArray = Physics.OverlapBox(gameObject.transform.position, new Vector3(1.0f, 1.0f, 1.0f), gameObject.transform.rotation);
             for (int i = 0; i < colliderArray.Length; i++)
             {

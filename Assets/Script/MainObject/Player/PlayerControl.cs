@@ -585,7 +585,6 @@ public class PlayerControl : MonoBehaviour
 
     public void Hit()
     {
-      GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(2, 0);
         if (playerState.playerFSM == PlayerState.PlayerFSM.Reveral)
         {
             return;
@@ -600,6 +599,7 @@ public class PlayerControl : MonoBehaviour
         playerState.hitTime = 1.0f;
         playerState.HP.x--;
         ani.aniState = 4;
+      GameObject.Find("SoundManager").GetComponent<SoundManager>().SoundPlay(2, 0);
     }
 
     IEnumerator GlitchRollback()
