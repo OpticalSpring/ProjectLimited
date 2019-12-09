@@ -77,12 +77,16 @@ public class EnemyType3 : Enemy
         phase++;
         for (int i = 0; i < phase; i++)
         {
-        GameObject temp1 = Instantiate(mob[0]);
-        temp1.transform.position = gameObject.transform.position + new Vector3(Random.Range(-10, 10),0, Random.Range(-10, 10));
-
-        GameObject temp2 = Instantiate(mob[1]);
-        temp2.transform.position = gameObject.transform.position + new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
-
+            if (i % 2 == 0)
+            {
+                GameObject temp1 = Instantiate(mob[0]);
+                temp1.transform.position = gameObject.transform.position + new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
+            }
+            if (i % 2 == 1)
+            {
+                GameObject temp2 = Instantiate(mob[1]);
+                temp2.transform.position = gameObject.transform.position + new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
+            }
         }
     }
 
@@ -162,6 +166,7 @@ public class EnemyType3 : Enemy
 
     void Attack(int i)
     {
+        ani.aniState = 3;
         GameObject temp = GameObject.Find("ObjectPool").GetComponent<ObjectPoolManager>().ActiveClone();
         temp.transform.position = attackPoint[i].transform.position;
         temp.transform.rotation = attackPoint[i].transform.rotation;
